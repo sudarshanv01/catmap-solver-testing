@@ -1,0 +1,176 @@
+#scaler = 'ThermodynamicScaler'
+
+rxn_expressions = [
+
+                  '* + CO2_g -> CO2*',   #1
+                  '* + CH4_g -> CH4*',    #2
+                  'CH4* + *_h <-> CH3-H* + *_h -> CH3* + H_h',      #3
+                  'CH3* + *_h <-> CH2-H* + *_h -> CH2* + H_h',           #4
+                  'CH2* + *_h <-> CH-H* + *_h -> CH* + H_h',              #5  
+                  'CH* + *_h <-> C-H* + *_h -> C* + H_h',    #6
+                  'CO2* + * <-> CO-O* + * -> CO* + O*',                   #7
+                  'H_h + H_h -> H2_g + *_h + *_h',    #8
+                  'CH4* + O* <-> CH3-OH* + * -> CH3* + OH*',   #9
+                  'CH3* + O* <-> OH-CH2* + * -> CH2* + OH*',     #10
+                  'CH2* + O* <-> OH-CH* + * -> CH* + OH*',   #11
+                  'CH* + O* <-> OH-C* + * -> C* + OH*',    #12
+                  'CH3* + O* <-> CH3-O* + * -> CH3O* + *',                 #13
+                  'CH2* + O* <-> CH2-O* + * -> CH2O* + *',   #14
+                  'CH* + O* <-> CH-O* + * -> CHO* + *',     #15
+                  'C* + C* <-> C-C* + * -> CC_s + *',
+                  'C* + O* <-> C-O* + * -> CO* + *',    #16
+      #             'CO* + * <-> C-O* + * -> C* + O*',  
+#                 'CH2* + CH2* <-> CH2-CH2* + * -> CH2CH2* + *',    #17
+                  'CO* -> CO_g + *',     #18
+ #                  'O* + H_h <-> O-H* + *_h -> OH* + *_h',                 #19
+  #                 'OH* + H_h <->  H-OH* + *_h ->  H2O_g + * + *_h ',      #20
+                  'CO2* + H_h <-> CO2-H* + *_h -> COOH* + *_h',           #22
+                  'COOH* + * <-> CO-OH* + * -> CO* + OH*',                #23
+                  'CO2* + H_h -> H-CO2* + *_h -> HCOO* + *_h',                            #25        
+                  'HCOO* + H_h <-> HCOO-H* + *_h -> HCOOH* + *_h',        #26
+                  'HCOOH* + * <-> HCO-OH* + * -> CHO* + OH*',          #27
+    #               'HCOOH* + H_h <-> H-HCOOH* + *_h -> H2COOH* + *_h',     #28        
+     #              'H2COOH* + * <-> H2CO-OH* + * -> CH2O* + OH*',          #29
+#		           'CO* + H_h <-> H-CO* + *_h -> CHO* + *_h',              #30
+                  'CHO* + *_h <-> H-CO* + *_h -> CO* + H_h',
+                  'C* + OH* <-> C-OH* + * <-> COH* + *',     #32
+                  'COH* + *_h <-> CO-H* + *_h -> CO* + H_h',    #31
+#                  'CO* + H_h <-> CO-H* + *_h -> COH* + *_h',    #31
+ #                  'COH* + * <-> C-OH* + * <-> C* + OH*',     #32
+ #                  'CHO* + H_h <-> H-CHO_s + *_h <-> CH2O_s + *_h',       #33
+     #              'CHO* + H_h <-> CHO-H* + *_h -> CHOH* + *_h',           #34 
+                  'CHOH* + * <-> CH-OH* + * -> CH* + OH*',               #35
+                  'CH2O* + *_h <-> H-CHO* + *_h -> CHO* + H_h',
+                  'CH3O* + *_h <-> H-CH2O_s + *_h -> CH2O_s + H_h',
+  #                   'CH2O* + H_h <-> H-CH2O_s + *_h -> CH3O_s + *_h',     #36
+ #                  'CH3O* + H_h <-> CH3O-H_s + *_h -> CH3OH_g + *_s + *_h', #37
+   #                'CHOH_s + H_h <-> H-CHOH_s + *_h <-> CH2OH_s + *_h',   #38
+  #                 'CH2OH_s + H_h <-> H-CH2OH_s + *_h <-> CH3OH_g + *_s + *_h',  #39
+	#             		'CH2CH2* -> CH2CH2_g + *', #21
+                  'C* + C* <-> C-C* + * -> CC_s + *'
+ #                    'CC* -> CC_g + * '  			
+                    ]
+
+
+surface_names = ['Co','Ni','Ru','Rh','Pt','Pd','Ag','Cu211']
+
+descriptor_names = ['CO_s','O_s']
+
+descriptor_ranges = [[-2.5,0.5],[-1,3]]
+resolution = 15
+
+temperature = 973
+P = 4
+
+species_definitions = {}
+
+delta = 1e-20
+species_definitions['CO_g'] = {'pressure':P*(10.5/100)}
+species_definitions['CO2_g'] = {'pressure':P*(37.5/100)}
+species_definitions['CH4_g'] = {'pressure':P*(38.5/100)}
+species_definitions['H2O_g'] = {'pressure':P*(1./100)}
+species_definitions['H2_g'] = {'pressure':P*(10.5/100)}
+
+numerical_delta_theta = 0.11
+adsorbate_interaction_model = 'second_order'
+
+default_self_interaction_parameter = 0
+
+species_definitions['s'] = {'site_names': ['211'], 'total':1} #upper step site
+species_definitions['h'] = {'site_names': ['211'], 
+                            'total':1,
+                           'cross_interaction_response_parameters':{'s':{
+                                                              'slope':1.0,
+                                                              'cutoff':0.66/2.,
+                                                              'smoothing':0.05,
+                                                              }},
+                            } #hydrogen reservoir
+
+
+scaling_constraint_dict = {
+                           'C_s':['+',0,None],
+                           'O_s':[0,'+',None],
+                           'CO_s':['+',0,None],
+                           'CO2_s':['+','+',None], 
+                           'H_h':['+',0,None],
+                           'CHO_s':['+','+',None],
+                           'OH_s':[0,'+',None],
+#                           'COOH_s':['+','+',None],
+#                           'HCOO_s':[0,'+',None],
+#                           'HCOOH_s':['+','+',None],
+#                           'H2COOH_s':['+','+',None],
+                           'CH2O_s':['+','+',None],
+                           'CH3O_s':[0,'+',None],
+#                           'CHOH_s':['+',0,None],
+#                           'CH2OH_s':['+',0,None],
+                          #  'CH3OH':['+',0,None],
+#                           'COH_s':['+','+',None], 
+                           'CH_s':['+',0,None],   
+                           'CH2_s':['+',0,None],
+                           'CH3_s':['+',0,None],
+#                          'CH3O_s': [0,'+',None],
+#                           'CH2O_s': [0.25,0.5,None],
+  #                          'CC_s':['+',0,None],
+ #                          'CHO-H_s': 'BEP', 
+                           'H-OH_s': 'BEP',
+                           'H-CO_s': 'BEP',
+                           'C-OH_s': 'BEP',
+#                           'H-CHOH_s': 'BEP',
+                          #  'H-CH2O': 'BEP',
+#                           'H-CH2OH_s':'BEP',
+                           'CH3O-H_s':'initial_state',
+#                           'CH-OH_s': 'BEP',
+                           'H-CHO_s': 'BEP',
+#                           'CO2-H_s': 'BEP',
+#                           'CO-OH_s': 'BEP',
+                           'CH-H_s': 'BEP',
+                           'CH2-H_s':'BEP',
+                           'C-H_s': 'BEP',
+                           'CH3-H_s': 'final_state',
+                           'CO-O_s': 'final_state',
+                           'O-H_s': 'BEP',
+#                           'H-CO2_s': 'BEP',
+#                           'HCOO-H_s': 'BEP',
+#                           'HCO-OH_s': 'BEP',
+  #                         'H-HCOOH_s': 'BEP',
+ #                          'H2CO-OH_s': 'BEP',
+                           'CH2-O_s': 'BEP',
+                           'CH-O_s': 'BEP',
+                           'C-O_s': 'BEP',
+                           'CH2-CH2_s': 'BEP',
+                           'OH-CH2_s': 'BEP',
+#                           'OH-CH_s': 'BEP',
+                           'OH-C_s': 'BEP',
+                             'CH3-OH_s': 'final_state',  
+ #                         'C-C_s': 'BEP',
+                           'CH2CH2_s':[0.5,0,None],                                                     
+ }
+
+
+data_file = 'data.pkl'
+
+input_file = 'energies.txt' #input data
+
+gas_thermo_mode = "shomate_gas"
+adsorbate_thermo_mode = "harmonic_adsorbate"
+
+max_entropy_per_mode = 3*8.617e-5
+
+decimal_precision = 200 #precision of numbers involved
+
+tolerance = 1e-75 #all d_theta/d_t's must be less than this at the solution
+
+max_rootfinding_iterations = 200
+
+max_bisections = 10
+
+use_numbers_solver = True
+fix_x_star = True
+
+#rxn_mechanisms = {
+#        'RWGS': [2,'half1',3,'half1',4,5,'half1',9,'half1',6,'half1',7,'half1',8],
+#        'HCOO': [2,'half1',9,'half1',10,'half1',11,12,'half1',13,'half1',14,'half1',15],
+#        'EtOH': [2,'half1',3,'half1',4,5,'half1',9,2,10,'half1',11,'half1',12,'half1',13,'half1',15,'half1',16,17],
+#	'MeOH': [2,'half1',3,'half1',4,1,21,22],
+	#'MeOHb':[2,'half1',3,'half1',18,1,19,20],
+ #       }

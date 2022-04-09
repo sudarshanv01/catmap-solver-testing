@@ -1,0 +1,16 @@
+{
+	"reactions": ["co_oxidation",
+		      "co_oxidation_ads_ads",
+		      "co_hydrogenation",
+		      "methanol_synthesis"
+		],
+	"solvers": ["coverages",
+		    "numbers_fix_xstar",
+		    "numbers_free_xstar"],
+	"convergence_levels":["low",
+			      "lowmid",
+			      "mid",
+			      "midtight",
+			      "tight",
+			      "tightplus"]
+}

@@ -1,1 +1,0 @@
-../numbers_free_xstar/plot_params.py

@@ -1,0 +1,196 @@
+{
+    "low": {
+        "co_oxidation": {
+            "coverages": {
+                "success": 899,
+                "failure": 168
+            },
+            "numbers_fix_xstar": {
+                "success": 899,
+                "failure": 161
+            },
+            "numbers_free_xstar": {
+                "success": 899,
+                "failure": 159
+            }
+        },
+        "co_oxidation_ads_ads": {
+            "coverages": {
+                "success": 893,
+                "failure": 510
+            },
+            "numbers_fix_xstar": {
+                "success": 898,
+                "failure": 362
+            },
+            "numbers_free_xstar": {
+                "success": 898,
+                "failure": 439
+            }
+        },
+        "methanol_synthesis": {
+            "coverages": {
+                "success": 898,
+                "failure": 461
+            },
+            "numbers_fix_xstar": {
+                "success": 0,
+                "failure": 899
+            },
+            "numbers_free_xstar": {
+                "success": 534,
+                "failure": 253
+            }
+        }
+    },
+    "lowmid": {
+        "co_oxidation": {
+            "coverages": {
+                "success": 899,
+                "failure": 332
+            },
+            "numbers_fix_xstar": {
+                "success": 899,
+                "failure": 328
+            },
+            "numbers_free_xstar": {
+                "success": 899,
+                "failure": 332
+            }
+        },
+        "co_oxidation_ads_ads": {
+            "coverages": {
+                "success": 899,
+                "failure": 482
+            },
+            "numbers_fix_xstar": {
+                "success": 899,
+                "failure": 343
+            },
+            "numbers_free_xstar": {
+                "success": 899,
+                "failure": 435
+            }
+        }
+    },
+    "mid": {
+        "co_oxidation": {
+            "coverages": {
+                "success": 899,
+                "failure": 480
+            },
+            "numbers_fix_xstar": {
+                "success": 899,
+                "failure": 476
+            },
+            "numbers_free_xstar": {
+                "success": 899,
+                "failure": 472
+            }
+        },
+        "co_oxidation_ads_ads": {
+            "coverages": {
+                "success": 899,
+                "failure": 482
+            },
+            "numbers_fix_xstar": {
+                "success": 899,
+                "failure": 342
+            },
+            "numbers_free_xstar": {
+                "success": 899,
+                "failure": 432
+            }
+        }
+    },
+    "midtight": {
+        "co_oxidation": {
+            "coverages": {
+                "success": 899,
+                "failure": 480
+            },
+            "numbers_fix_xstar": {
+                "success": 899,
+                "failure": 476
+            },
+            "numbers_free_xstar": {
+                "success": 899,
+                "failure": 472
+            }
+        },
+        "co_oxidation_ads_ads": {
+            "coverages": {
+                "success": 899,
+                "failure": 482
+            },
+            "numbers_fix_xstar": {
+                "success": 899,
+                "failure": 332
+            },
+            "numbers_free_xstar": {
+                "success": 899,
+                "failure": 430
+            }
+        }
+    },
+    "tight": {
+        "co_oxidation": {
+            "coverages": {
+                "success": 899,
+                "failure": 480
+            },
+            "numbers_fix_xstar": {
+                "success": 899,
+                "failure": 476
+            },
+            "numbers_free_xstar": {
+                "success": 899,
+                "failure": 472
+            }
+        },
+        "co_oxidation_ads_ads": {
+            "coverages": {
+                "success": 899,
+                "failure": 482
+            },
+            "numbers_fix_xstar": {
+                "success": 899,
+                "failure": 332
+            },
+            "numbers_free_xstar": {
+                "success": 899,
+                "failure": 430
+            }
+        }
+    },
+    "tightplus": {
+        "co_oxidation": {
+            "coverages": {
+                "success": 899,
+                "failure": 480
+            },
+            "numbers_fix_xstar": {
+                "success": 899,
+                "failure": 476
+            },
+            "numbers_free_xstar": {
+                "success": 899,
+                "failure": 472
+            }
+        },
+        "co_oxidation_ads_ads": {
+            "coverages": {
+                "success": 899,
+                "failure": 482
+            },
+            "numbers_fix_xstar": {
+                "success": 899,
+                "failure": 332
+            },
+            "numbers_free_xstar": {
+                "success": 899,
+                "failure": 430
+            }
+        }
+    }
+}

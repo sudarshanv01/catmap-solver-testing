@@ -1,8 +1,8 @@
 {
-	"decimal_precision": 100,
-	"tolerance": 1e-20,
-	"max_rootfinding_iterations": 100,
-	"max_bisections": 2,
-	"max_damping_iterations": 30,
-	"resolution": 30
+	"decimal_precision": 250,
+	"tolerance": 1e-10,
+	"max_rootfinding_iterations": 250,
+	"max_bisections": 0,
+	"max_damping_iterations": 15,
+	"resolution": 10
 }

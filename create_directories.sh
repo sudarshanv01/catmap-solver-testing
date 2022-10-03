@@ -1,15 +1,20 @@
 #!/bin/bash
 
-# CASES=("co_oxidation" "co_oxidation_ads_ads" "co_hydrogenation" "methanol_synthesis")
-CASES=("co_oxidation_ads_ads")
-SOLVERS=("coverages" "numbers_fix_xstar" "numbers_free_xstar")
-BASE=$1
+CASES=("co_oxidation" "co_oxidation_ads_ads" "co_hydrogenation" "methanol_synthesis" "co_reduction")
+SOLVERS=("coverages" "numbers_free_xstar")
 TEMPLATE="input_files"
 INPUT_PREFIX="input"
 ENERGY_PREFIX="energies"
 SOLVER_SP_PREFIX="solver_specifics"
 MID="_"
 
+if [ $# -eq 0 ]
+  then
+    echo "No arguments supplied; please supply the convergence of the solver name."
+    exit 0
+fi
+
+BASE=$1
 for CASE in ${CASES[@]}; do
     for SOLVER in ${SOLVERS[@]}; do
 	mkdir -p $BASE/$CASE/$SOLVER

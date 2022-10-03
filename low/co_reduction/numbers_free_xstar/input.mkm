@@ -1,0 +1,152 @@
+rxn_expressions = [
+    'H_g + ele_g + *_s <-> H-ele*_s <-> H*_s; beta=0.7',	# Volmer 1
+    'H_g + ele_g + H*_s -> H2-ele*_s -> H2_g + *_s; beta=0.5',     # Heyrovsky 2
+    'H*_s + H*_s -> H-H*_s + *_s -> H2_g + 2*_s',     # Tafel 3
+    'OH*_s + H_g + ele_g <-> H2O_g + *_s',	#4
+
+    'CO_g + *_s <-> CO*_s',	#5
+    'CO*_s + H_g + ele_g <-> H-CO-ele*_s <-> CHO*_s; beta=0.5',	# Electro_CHO 6
+    'CHO_s + H_g + ele_g <-> CHOH_s',	#7
+    'CHOH_s + H_g + ele_g <-> CH*_s + H2O_g',	#8
+    'CH*_s + H_g + ele_g <-> CH2*_s',	#9
+    'CH2*_s + H_g + ele_g <-> CH3*_s',	#10
+    'CH3*_s + H_g + ele_g <-> CH4_g + *_s',	#11
+
+    'CO*_s + H_g + ele_g <-> CO-H-ele*_s <-> COH*_s',	# Electro_COH 12
+    'COH_s + H_g + ele_g <-> COH-H-ele_s <-> CHOH_s',	#13
+
+    'CO*_s + H_s <-> H-CO_s + *_s <-> CHO_s + *_s', # Thermo_CHO 14
+    'CO_s + H_s <-> CO-H_s + *_s <-> COH_s + *_s',  # Thermo_COH 15
+    'CH*_s + H*_s <-> CH-H*_s + *_s <-> CH2*_s + *_s',	#16
+    'CH2*_s + H*_s <-> CH2-H*_s + *_s <-> CH3*_s + *_s',	#17
+    'CH3*_s + H*_s <-> CH3-H*_s + *_s <-> CH4*_g + 2*_s',	#18
+
+    'O2_g + *_s -> O2*_s',     #19 fake ads
+
+]
+
+prefactor_list = [1e13]*len(rxn_expressions)  #Heine: prefactor for CO is 1e8
+
+surface_names = ['Au', 'Ag', 'Cu', 'Pt', 'Pd', 'Rh']
+
+descriptor_names = ['CO_s','O2_s']
+
+descriptor_ranges = [[-2,1],[9,9]]
+
+temperature = 300
+
+voltage = -1
+
+beta = 0.5
+
+species_definitions = {}
+species_definitions['H_g'] = {'pressure':1.0}
+species_definitions['ele_g'] = {'pressure':1.0, 'composition':{}}
+species_definitions['CO_g'] = {'pressure':0.001}
+species_definitions['H2_g'] = {'pressure':0.0}
+species_definitions['H2O_g'] = {'pressure':0.035}
+species_definitions['CH4_g'] = {'pressure':0.0}
+species_definitions['O2_g'] = {'pressure':0.0}
+
+species_definitions['s'] = {'site_names': ['211'], 'total':1.0}
+
+data_file = 'data.pkl'
+input_file = 'energies.txt'
+
+gas_thermo_mode = 'ideal_gas' 
+adsorbate_thermo_mode = 'harmonic_adsorbate'
+electrochemical_thermo_mode = 'simple_electrochemical'
+
+# scale by [H, O2, constant]
+scaling_constraint_dict = {
+		'CH_s':['+',0.,None],
+		'CH2_s':['+',0.,None],
+		'CH3_s':['+',0.,None],
+		'OH_s':['+',0.,None],
+		'CHOH_s':['+',0.,None],
+		'COH_s':['+',0.,None],
+		'CHO_s':['+',0.,None],
+		'H_s':['+',0.,None],
+		'H-H_s':'initial_state',
+		'H-ele_s':'final_state',
+		'H2-ele_s':'initial_state',                                      
+		'H-CO_s':'initial_state',                                      
+		#'H-CO-ele_s': 'TS(CO_s):[0.66,0.86]',
+                          }
+
+rxn_mechanisms = {
+	'CH4_via_CHO-ele': [5, 6, 7, 8, 9, 10, 11],
+}
+
+#adsorbate_interaction_model = 'second_order' #use "single site" interaction model
+adsorbate_interaction_model = 'first_order' #use "single site" interaction model
+
+interaction_response_function = 'smooth_piecewise_linear' #use "smooth piecewise linear" interactions
+
+interaction_fitting_mode = None
+cross_interaction_mode = 'geometric_mean' #use geometric mean for cross parameters
+
+interaction_scaling_constraint_dict = {
+				'CO_s':[0,0,None],
+				'H_s':[0,0,None],
+				'OH_s':[0,0,None],
+				'COH_s':[0,0,None],
+				'CHO_s':[0,0,None],
+				'CH_s':[0,0,None],
+				'CH2_s':[0,0,None],
+				'CH3_s':[0,0,None],
+                          }
+
+interaction_strength = 1.0
+
+if 1 == len(surface_names):
+	numBeforePt = 0
+	numAfterPt = 0
+else:
+	numBeforePt = len(surface_names)-surface_names.index('Pt')
+	numAfterPt = len(surface_names)-numBeforePt-1
+	transition_state_cross_interaction_mode = 'transition_state_scaling' #use TS scaling for TS interaction
+
+species_definitions['s']['interaction_response_parameters'] = {'cutoff':0.25,'smoothing':0.05}
+
+eHCO=0.7274
+eCO=2.4670
+eH=0.0
+
+species_definitions['CO_s'] = {
+		'self_interaction_parameter':[None]*numBeforePt+[eCO]+[None]*numAfterPt,
+		'cross_interaction_parameters':{
+		'H_s': [None]*numBeforePt+[eHCO]+[None]*numAfterPt,
+		'H-ele_s': [None]*numBeforePt+[eHCO*1.08]+[None]*numAfterPt,
+		'H2-ele_s': [None]*numBeforePt+[eHCO*0.7]+[None]*numAfterPt,
+		'H-H_s': [None]*numBeforePt+[eHCO*1.59]+[None]*numAfterPt,
+		'H-CO-ele_s': [None]*numBeforePt+[eCO*0.79]+[None]*numAfterPt,
+		'CO-H-ele_s': [None]*numBeforePt+[eCO*3.1889]+[None]*numAfterPt,
+		'COH-H-ele_s': [None]*numBeforePt+[eCO*0.56]+[None]*numAfterPt,
+		'H-CO_s': [None]*numBeforePt+[eCO*1]+[None]*numAfterPt,
+			}
+		}
+
+species_definitions['OH_s'] = {
+		'self_interaction_parameter':[None]*numBeforePt+[1.0330]+[None]*numAfterPt,
+		}
+
+species_definitions['H_s'] = {
+		'cross_interaction_parameters':{
+		'H-ele_s': [None]*numBeforePt+[eH*1.08]+[None]*numAfterPt,
+		'H2-ele_s': [None]*numBeforePt+[eH*0.7]+[None]*numAfterPt,
+		'H-H_s': [None]*numBeforePt+[eH*1.59]+[None]*numAfterPt,
+		'H-CO-ele_s': [None]*numBeforePt+[eHCO*0.79]+[None]*numAfterPt,
+		'CO-H-ele_s': [None]*numBeforePt+[eHCO*3.1889]+[None]*numAfterPt,
+		'COH-H-ele_s': [None]*numBeforePt+[eHCO*0.56]+[None]*numAfterPt,
+		'H-CO_s': [None]*numBeforePt+[eHCO*1]+[None]*numAfterPt,
+			}
+		}
+
+for species in ['CH2O_s', 'CH_s', 'CH2_s', 'CH3_s', 'CHOH_s', 'CHO_s']:
+	species_definitions[species] = species_definitions['CO_s']
+
+species_definitions['COH_s'] = {
+		'self_interaction_parameter':[None]*numBeforePt+[1.75*eCO]+[None]*numAfterPt,
+		}
+

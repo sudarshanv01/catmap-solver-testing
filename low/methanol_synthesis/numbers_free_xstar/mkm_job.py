@@ -38,7 +38,10 @@ model.max_damping_iterations = solver_specifics['max_damping_iterations']
 # Use the same resolution
 model.resolution = solver_specifics['resolution']
 
+# Run in DEBUG mode
+model.DEBUG = True
+
 # Store the production rate
-model.output_variables += ['production_rate']
+# model.output_variables += ['production_rate']
 
 model.run()

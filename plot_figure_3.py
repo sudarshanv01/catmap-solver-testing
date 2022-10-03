@@ -1,15 +1,16 @@
-"""Plot the initial guess for debugging the new solver."""
+"""Plot the solution of CO coverages with different solver parameters."""
 import numpy as np
 import matplotlib.pyplot as plt
 import csv
 import mpmath as mp
 import json
 import os
+import string
 from glob import glob
 from plot_params import get_plot_params
 get_plot_params()
 
-def plot_coverage_maps(foldername):
+def plot_coverage_maps(foldername, ax, ti=0):
     """Plot the initial guesses for the coverage
     and the final converage after the solution for
     the different cases supplied through folder_names."""
@@ -61,43 +62,46 @@ def plot_coverage_maps(foldername):
         sum_thetas = np.sum(thetas, axis=1)
         thetas = thetas.T
 
-        fig, ax = plt.subplots(1, len(thetas),
-                               constrained_layout=True,
-                               figsize=(3.5*len(thetas), 3.),
-                               sharex=True, sharey=True)
+        cax = ax.scatter(desc1, desc2, c=thetas[ti], s=10, cmap='jet', vmin=0, vmax=1)
 
-        for j in range(len(thetas)):
-            cax = ax[j].scatter(desc1, desc2, c=thetas[j], s=10, cmap='jet', vmin=0, vmax=1)
-            ax[j].set_xlabel(r'$\Delta G$ %s* (eV)'%descriptor_names[0].replace('_s', ''))
-            if j==0:
-                ax[j].set_ylabel(r'$\Delta G$ %s* (eV)'%descriptor_names[1].replace('_s', ''))
-            if j == len(thetas)-1:
-                # Plot the colorbar
-                fig.colorbar(cax, ax=ax[j])
-            if use_titles:
-                ax[j].set_title(titles[j])
+        return cax
 
-        fig.savefig('output/'+handle+'_'+foldername.replace('/', '_')+'.png', dpi=300) 
 
 if __name__ == '__main__':
     """Plot the initial coverage and the solution."""
 
     # Provide the filenames of the different coverages
-    files = {'boltzmann': 'initial_guess.csv', 
-             'solution': 'solution.csv',
-             }
+    files = {'solution': 'solution.csv'}
 
     # read in calculation details    
     with open('details.json', 'r') as f:
         details = json.load(f)
 
-    reactions = details['reactions'] 
+    reaction = 'co_oxidation'
     solvers = details['solvers']
     convergence_levels = details['convergence_levels']
+    # Remove tightplus from convergence_levels
+    convergence_levels.remove('tightplus')
 
     # Loop over the different solvers
-    for conv_level in convergence_levels:
-        for r, reaction in enumerate(reactions):
-            print(reaction)
-            for i, solver in enumerate(solvers): 
-                plot_coverage_maps(f'{conv_level}/{reaction}/{solver}')
+    for i, solver in enumerate(solvers): 
+        fig, ax = plt.subplots(1, len(convergence_levels), 
+                              figsize=(6.75, 1.5), constrained_layout=True)
+        for j, conv_level in enumerate(convergence_levels):
+            cax = plot_coverage_maps(f'{conv_level}/{reaction}/{solver}', ax[j])
+            ax[j].set_xlabel(r'$\Delta G$ O* (eV)', fontsize=8)
+            if j == 0:
+                ax[j].set_ylabel(r'$\Delta G$ CO* (eV)', fontsize=8)
+            if j == len(convergence_levels) -1 :
+                fig.colorbar(cax, ax=ax[j])
+            ax[j].set_title(conv_level, fontsize=8)
+
+        # Label in alphabetical order the axes on the top left above the plot
+        for j, a in enumerate(ax):
+            a.text(0.05, 1.15, string.ascii_lowercase[j]+')',
+                    horizontalalignment='left',
+                    verticalalignment='top',
+                    transform=a.transAxes,
+                    fontsize=6) 
+
+        fig.savefig(f'figures/solver_parameters_{solver}.png', dpi=300)

@@ -50,43 +50,32 @@ if __name__ == '__main__':
     numerically for different types of solver."""
 
     reactions = ['co_oxidation', 'co_oxidation_ads_ads']
-    solvers = ['numbers_fix_xstar', 'numbers_free_xstar']
-    conv_levels = 'midtight'
+    solvers = [ 'numbers_free_xstar']
+    conv_levels = 'low'
     SOLVER_COLOR = ['tab:blue', 'tab:green']
 
     labels = ['fix-x', 'free-x']
-    titles = ['CO oxidation', 'CO oxidation with ads-ads']
+    titles = ['CO oxidation', 'CO oxidation (ads-ads)']
 
     fig, ax = plt.subplots(1, len(reactions), figsize=(5.5, 2.5), constrained_layout=True)
 
-    assert len(solvers) == 2; 'There should be two solvers' 
-
     for j, reaction in enumerate(reactions):
         
-        solver_1, solver_2 = solvers
+        solver = solvers[0]
 
         # Import the Jacobian error for the first solver
-        with open(os.path.join(conv_levels, reaction, solver_1, 'jacobian_norm.csv'), 'r') as f:
-            print('reading: ', os.path.join(conv_levels, reaction, solver_1, 'jacobian_norm.csv'))
+        with open(os.path.join(conv_levels, reaction, solver, 'jacobian_norm.csv'), 'r') as f:
+            print('reading: ', os.path.join(conv_levels, reaction, solver, 'jacobian_norm.csv'))
             reader = csv.reader(f)
             data_1 = list(reader)
         data_1 = np.array(data_1, dtype=float)
 
 
-        # Import the Jacobian error for the second solver
-        with open(os.path.join(conv_levels, reaction, solver_2, 'jacobian_norm.csv'), 'r') as f:
-            print('reading: ', os.path.join(conv_levels, reaction, solver_2, 'jacobian_norm.csv'))
-            reader = csv.reader(f)
-            data_2 = list(reader)
-        data_2 = np.array(data_2, dtype=float)
-
         # Prepare the data for plotting
         data_1 = prepare_data(data_1)
-        data_2 = prepare_data(data_2)
 
         # Plot the data
         plot_data(data_1, ax[j], color=SOLVER_COLOR[0])
-        plot_data(data_2, ax[j], color=SOLVER_COLOR[1])
 
     # Plot axis on log10 scale
     for a in ax.flatten():
@@ -100,8 +89,6 @@ if __name__ == '__main__':
         ylims = a.get_ylim()
         a.plot([ylims[0], ylims[1]], [ylims[0], ylims[1]], 'k--', lw=1)
 
-    for label, color in zip(labels, SOLVER_COLOR):
-        ax[0].plot([], [], 'o', color=color, label=label)
     for title, a in zip(titles, ax):
         a.set_title(title, fontsize=8)
     
@@ -111,6 +98,5 @@ if __name__ == '__main__':
         a.text(0.05, 0.95, string.ascii_lowercase[i] + ')', transform=a.transAxes, 
                 va='top')
 
-    ax[0].legend(loc='lower right')
 
     fig.savefig(f'figures/norm_jacobian.png', dpi=300)

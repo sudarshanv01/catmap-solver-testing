@@ -3,10 +3,9 @@
 		      "methanol_synthesis",
 			  "co_oxidation",
 			  "co_hydrogenation",
-			  "co_reduction",
 			  "co_oxidation_ads_ads"
 		],
 	"solvers": ["coverages",
-		    "numbers_free_xstar"],
+		    	"numbers_free_xstar"],
 	"convergence_levels":["low"]
 }

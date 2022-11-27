@@ -1,180 +1,172 @@
-"""Make a parity plot of the errors form two solvers."""
-import numpy as np
-import matplotlib.pyplot as plt
+import string
 import os
 import csv
-import mpmath as mp
-from pprint import pprint
-from plot_params import get_plot_params
+import json
 from collections import defaultdict
+import itertools
+
+from typing import List, Tuple, Dict, Any, Union, Optional
+
+import numpy as np
+
+import pandas as pd
+
+import mpmath as mp
+
+import matplotlib.pyplot as plt
+from matplotlib.ticker import LogLocator
+from matplotlib.lines import Line2D
+
+from plot_params import get_plot_params
 
 get_plot_params()
-import matplotlib as mpl
-import json
 
-mpl.rcParams["lines.markersize"] = 4
-import string
+import logging
 
-
-def prepare_data(data):
-    """Prepare the data for plotting."""
-    results = []
-    for i, dat in enumerate(data):
-        results.append([[data[i][0], data[i][1]], data[i][2:]])
-    return results
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
 
 
-def get_data_to_plot(results, accuracy):
-    """Get the exact points to plot from the results."""
-    # Initialise the variables
-    prev_desc = results[0][0]
-    iter_data = []
-    # Store data per descriptor
-    data_to_plot = defaultdict(lambda: defaultdict(list))
-    # Determine the number of unique desc points
-    all_desc = []
-    for desc, (iteration, error) in results:
-        all_desc.append(desc)
-    unique_desc = np.unique(all_desc)
-
-    # Iterate over the results
-    for desc, (iteration, error) in results:
-        if prev_desc == desc:
-            # Store the descriptor and the error
-            iter_data.append([iteration, error])
-        else:
-            # Create a new cycle and plot what was already there
-            iter_data = np.array(iter_data)
-            # Sort iter_data by the first column
-            # iter_data = iter_data[iter_data[:,0].argsort()]
-            # Split the array into chunks such that the first column
-            # is always monotonically increasing
-            chunks = np.split(iter_data, np.where(np.diff(iter_data[:, 0]) < 0)[0] + 1)
-
-            for iter_data in chunks:
-                if np.min(iter_data[:, 1]) <= accuracy:
-                    memo_desc = str(desc[0]) + "&" + str(desc[1])
-                    data_to_plot[memo_desc]["success"].extend(iter_data.T)
-                else:
-                    memo_desc = str(desc[0]) + "&" + str(desc[1])
-                    data_to_plot[memo_desc]["failure"].extend(iter_data.T)
-
-            iter_data = []
-            iter_data.append([iteration, error])
-
-        prev_desc = desc
-    if len(unique_desc) == 2:  # only one descriptor
-        iter_data = np.array(iter_data)
-        chunks = np.split(iter_data, np.where(np.diff(iter_data[:, 0]) < 0)[0] + 1)
-        memo_desc = str(desc[0]) + "&" + str(desc[1])
-        for iter_data in chunks:
-            if np.min(iter_data[:, 1]) <= accuracy:
-                memo_desc = str(desc[0]) + "&" + str(desc[1])
-                data_to_plot[memo_desc]["success"].extend(iter_data.T)
-            else:
-                memo_desc = str(desc[0]) + "&" + str(desc[1])
-                data_to_plot[memo_desc]["failure"].extend(iter_data.T)
-
-    return data_to_plot
-
-
-def plot_data(data_to_plot_1, ax):
+def evaulate_data(
+    data: pd.DataFrame,
+    accuracy: float,
+    ax: plt.Axes,
+    success_settings: dict = {},
+    failure_settings: dict = {},
+) -> Tuple[float]:
     """Plot the data to compare two solvers."""
-    success_runs = 0
-    failure_runs = 0
-    for desc, error_1 in data_to_plot_1.items():
-        successes = np.array(error_1["success"], dtype=object)
-        failures = np.array(error_1["failure"], dtype=object)
-        if len(error_1["success"]) > 0:
-            # Iterate over the success runs, skipping every other one
-            for i in range(0, len(successes), 2):
-                ax[0].plot(successes[i], successes[i + 1], ".", markerfacecolor="none")
-                success_runs += 1
-        if len(error_1["failure"]) > 0:
-            # Do the same for failure runs
-            for i in range(0, len(failures), 2):
-                ax[1].plot(failures[i], failures[i + 1], ".", markerfacecolor="none")
-                failure_runs += 1
 
-    print("Success runs:", success_runs)
-    print("Failure runs:", failure_runs)
-    return success_runs, failure_runs
+    # Remove rows where the error is equal to 0
+    data = data[data["error"] != 0]
+
+    # Store success and failure data
+    success = 0
+    failure = 0
+
+    for (desc1, desc2), dat in data.groupby(["descriptor1", "descriptor2"]):
+
+        # Split the pandas dataframe into a series of dataframes where the
+        # "iteration" column is not strictly monotonically increasing
+        chunks = np.split(dat, np.where(np.diff(dat["iteration"]) < 0)[0] + 1)
+
+        # Iterate over the chunks
+        for chunk in chunks:
+            # Make sure that the chunks are ordered with respect to iteration
+            chunk = chunk.sort_values(by=["iteration"])
+            # Check if the error of the last row is lower than the accuracy
+            if chunk["error"].iloc[-1] < accuracy: 
+                success += 1
+                ax.plot(chunk["iteration"], chunk["error"], **success_settings)
+            else:
+                # Make sure that none of the errors are lower than the accuracy
+                assert not any(chunk["error"] < accuracy)
+                failure += 1
+                ax.plot(chunk["iteration"], chunk["error"], **failure_settings)
+
+    return success, failure
 
 
 if __name__ == "__main__":
-    """Compare two solvers on the basis of their
-    errors. Each point is an iteration, if the
-    error from the first solver is larger than the
-    error from the second solver, the point will be
-    on the left side of the parity plot."""
+    """Plot the norm error for the solvers."""
 
-    # read in calculation details
-    with open("details.json", "r") as f:
+    # Read in the details of the comparison
+    with open(os.path.join("config", "details.json"), "r") as f:
         details = json.load(f)
+    logger.info("Details: %s", details)
 
+    # Store the relevant data to find the directories to look in
     reactions = details["reactions"]
     solvers = details["solvers"]
     convergence_levels = details["convergence_levels"]
 
-    labels = ["Coverages", "numbers"]
+    # Labels for the solvers that are being compared
+    labels = [r"Coverages solver, $\theta$", r"Numbers solver, $x$"]
 
-    convergence_data = defaultdict(
-        lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
+    # Create a dataframe to store the data
+    convergence_data = pd.DataFrame(
+        columns=["solver", "reaction", "convergence_level", "success", "failure"]
     )
 
-    for conv_level in convergence_levels:
-        for r, reaction in enumerate(reactions):
+    # Plot settings for success and failure, remove fill for points and no lines
+    success_settings = {
+        "color": "tab:green",
+        "alpha": 0.5,
+        "marker": "o",
+        "fillstyle": "none",
+        "linestyle": "none",
+    }
+    failure_settings = {
+        "color": "tab:red",
+        "alpha": 0.5,
+        "marker": "o",
+        "fillstyle": "none",
+        "linestyle": "none",
+    }
 
-            # Plot separate figures for the comparison of the solvers
-            fig, ax = plt.subplots(2, 2, figsize=(4.25, 4.25), constrained_layout=True)
+    # Reaction name
+    reaction_name = {
+        'methanol_synthesis': 'Methanol synthesis',
+        'co_oxidation': 'CO oxidation',
+        'co_hydrogenation': 'CO hydrogenation',
+        'co_oxidation_ads_ads': 'CO oxidation (ads-ads)',
+    }
 
-            for i, solver in enumerate(solvers):
+    # Using itertools to iterate over covergence_levels and reactions
+    for conv_level, reaction in itertools.product(convergence_levels, reactions):
 
-                # Import data from csv files
-                if not os.path.isfile(
-                    os.path.join(conv_level, reaction, solver, "error_log.csv")
-                ):
-                    continue
+        # Plot separate figures for the comparison of the solvers
+        fig, ax = plt.subplots(1, 2, figsize=(4.5, 2.5), constrained_layout=True)
 
-                with open(
-                    os.path.join(conv_level, reaction, solver, "error_log.csv"), "r"
-                ) as f:
-                    reader = csv.reader(f)
-                    data = list(reader)
+        # Iterate over the solvers
+        for i, solver in enumerate(solvers):
 
-                print("Plotting:", reaction, solver, conv_level)
+            # Import data from csv files
+            if not os.path.isfile(
+                os.path.join(conv_level, reaction, solver, "error_log.csv")
+            ):
+                logger.warning(
+                    f"File {os.path.join(conv_level, reaction, solver, 'error_log.csv')} does not exist."
+                )
+                continue
 
-                # Get the accuracy of the solver
-                with open(
-                    os.path.join(conv_level, reaction, solver, "solver_specifics.json")
-                ) as f:
-                    solver_specifics = json.load(f)
-                ACCURACY = solver_specifics["tolerance"]
+            # Use pandas to read the csv file
+            data = pd.read_csv(
+                os.path.join(conv_level, reaction, solver, "error_log.csv")
+            )
+            # Set labels for data
+            data.columns = ["descriptor1", "descriptor2", "iteration", "error"]
+            logger.info("Plotting: %s, %s, %s", reaction, solver, conv_level)
 
-                # Prepare the data for plotting
-                data = np.array(data, dtype=float)
+            # Get the accuracy of the solver
+            with open(
+                os.path.join(conv_level, reaction, solver, "solver_specifics.json")
+            ) as f:
+                solver_specifics = json.load(f)
+            ACCURACY = solver_specifics["tolerance"]
+            logger.info("Accuracy: %s", ACCURACY)
 
-                # Prepare the data for plotting
-                data = prepare_data(data)
+            # Get the data to plot
+            success, failure = evaulate_data(
+                data,
+                accuracy=ACCURACY,
+                ax=ax[i],
+                success_settings=success_settings,
+                failure_settings=failure_settings,
+            )
 
-                # Get the data to plot
-                data_to_plot = get_data_to_plot(data, accuracy=ACCURACY)
+            # Store the data in the dataframe
+            data_to_df = {
+                "solver": solver,
+                "reaction": reaction,
+                "convergence_level": conv_level,
+                "success": success,
+                "failure": failure,
+            }
 
-                # Plot the result
-                success, fail = plot_data(data_to_plot, ax[:, i])
-
-                convergence_data[conv_level][reaction][solver]["success"] = success
-                convergence_data[conv_level][reaction][solver]["failure"] = fail
-
-                ax[0, i].set_title(labels[i])
-                ax[0, i].annotate("Success", xy=(0.6, 0.9), xycoords="axes fraction")
-                ax[1, i].annotate("Failure", xy=(0.6, 0.9), xycoords="axes fraction")
-
-            # Label the axes
-            for a in ax.flatten():
-                a.set_xlabel("Iteration")
-                a.set_ylabel("Error")
-                a.set_yscale("log")
+            # Concatenate the data to the dataframe
+            convergence_data = pd.concat(
+                [convergence_data, pd.DataFrame(data_to_df, index=[0])]
+            )
 
             for j, a in enumerate(ax.flatten()):
                 a.text(
@@ -183,11 +175,44 @@ if __name__ == "__main__":
                     string.ascii_lowercase[j] + ")",
                     transform=a.transAxes,
                     va="top",
+                    fontsize=10,
                 )
 
-            fig.savefig(f"output/norm_error_{conv_level}_{reaction}.png", dpi=300)
-            plt.close(fig)
+            # Label the figure
+            ax[i].set_title(labels[i])
 
-    # Save the convergence data
-    with open("output/convergence_data.json", "w") as f:
-        json.dump(convergence_data, f, indent=4)
+            # Make a dashed line to show the accuracy
+            ax[i].axhline(y=ACCURACY, color="black", linestyle="--")
+
+        # Set the x and y labels
+        ax[0].set_xlabel("Iteration")
+        ax[1].set_xlabel("Iteration")
+        ax[0].set_ylabel("Norm error")
+        # Plot y on a log scale
+        ax[0].set_yscale("log")
+        ax[1].set_yscale("log")
+        # Set the log axis ticks on the minor ticks
+        ax[0].yaxis.set_minor_locator(LogLocator(base=10.0, subs="all"))
+        ax[1].yaxis.set_minor_locator(LogLocator(base=10.0, subs="all"))
+
+        # Make super title for the figure with the reaction name
+        fig.suptitle(reaction_name[reaction], fontsize=11)
+
+        # Set legend for the figure on axis 1, where red is the failure and green is the success
+        # Make it on the right hand side of the figure
+        ax[1].plot([], [], color='tab:green', label="Success")
+        ax[1].plot([], [], color='tab:red', label="Failure")
+        ax[1].legend(
+            loc="center left",
+            frameon=False,
+            bbox_to_anchor=(1.04, 1),
+            borderaxespad=0
+        )
+
+
+        fig.savefig(f"output/norm_error_{conv_level}_{reaction}.png", dpi=300)
+        plt.close(fig)
+
+    # Save the dataframe
+    convergence_data.to_csv("output/convergence_data.csv", index=False)
+    logger.info(convergence_data)

@@ -15,15 +15,33 @@ if [ $# -eq 0 ]
 fi
 
 BASE=$1
-for CASE in ${CASES[@]}; do
-    for SOLVER in ${SOLVERS[@]}; do
-	mkdir -p $BASE/$CASE/$SOLVER
-	# Copy input files
-	cp $TEMPLATE/$INPUT_PREFIX$MID$CASE.mkm $BASE/$CASE/$SOLVER/$INPUT_PREFIX.mkm 
-	cp $TEMPLATE/$ENERGY_PREFIX$MID$CASE.txt $BASE/$CASE/$SOLVER/$ENERGY_PREFIX.txt 
-	# Copy python job files
-	cp $TEMPLATE/mkm_job.py $BASE/$CASE/$SOLVER/mkm_job.py
-	# Copy the json file required for the solver
-	cp $TEMPLATE/$SOLVER_SP_PREFIX$MID$BASE.json $BASE/$CASE/$SOLVER/$SOLVER_SP_PREFIX.json
-    done
-done
+
+if [ "$BASE" == "tex" ]
+	then
+		echo "Creating directories for text output."
+		for CASE in ${CASES[@]}; do
+			for SOLVER in ${SOLVERS[@]}; do
+				mkdir -p $BASE/$CASE/$SOLVER
+				# Copy input files
+				cp $TEMPLATE/$INPUT_PREFIX$MID$CASE.mkm $BASE/$CASE/$SOLVER/$INPUT_PREFIX.mkm 
+				cp $TEMPLATE/$ENERGY_PREFIX$MID$CASE.txt $BASE/$CASE/$SOLVER/$ENERGY_PREFIX.txt 
+				# Copy python job files
+				cp $TEMPLATE/tex_mkm.py $BASE/$CASE/$SOLVER/tex_mkm.py
+				# Copy the json file required for the solver
+				cp $TEMPLATE/$SOLVER_SP_PREFIX$MID"low".json $BASE/$CASE/$SOLVER/$SOLVER_SP_PREFIX.json
+			done
+		done
+else
+	for CASE in ${CASES[@]}; do
+		for SOLVER in ${SOLVERS[@]}; do
+		mkdir -p $BASE/$CASE/$SOLVER
+		# Copy input files
+		cp $TEMPLATE/$INPUT_PREFIX$MID$CASE.mkm $BASE/$CASE/$SOLVER/$INPUT_PREFIX.mkm 
+		cp $TEMPLATE/$ENERGY_PREFIX$MID$CASE.txt $BASE/$CASE/$SOLVER/$ENERGY_PREFIX.txt 
+		# Copy python job files
+		cp $TEMPLATE/mkm_job.py $BASE/$CASE/$SOLVER/mkm_job.py
+		# Copy the json file required for the solver
+		cp $TEMPLATE/$SOLVER_SP_PREFIX$MID$BASE.json $BASE/$CASE/$SOLVER/$SOLVER_SP_PREFIX.json
+		done
+	done
+fi

@@ -93,14 +93,14 @@ if __name__ == "__main__":
         "alpha": 0.5,
         "marker": "o",
         "fillstyle": "none",
-        "linestyle": "none",
+        "linestyle": "--",
     }
     failure_settings = {
         "color": "tab:red",
         "alpha": 0.5,
         "marker": "o",
         "fillstyle": "none",
-        "linestyle": "none",
+        "linestyle": "--",
     }
 
     # Reaction name
@@ -187,7 +187,7 @@ if __name__ == "__main__":
         # Set the x and y labels
         ax[0].set_xlabel("Iteration")
         ax[1].set_xlabel("Iteration")
-        ax[0].set_ylabel("Norm error")
+        ax[0].set_ylabel("Maximum error")
         # Plot y on a log scale
         ax[0].set_yscale("log")
         ax[1].set_yscale("log")
@@ -213,6 +213,12 @@ if __name__ == "__main__":
         fig.savefig(f"output/norm_error_{conv_level}_{reaction}.png", dpi=300)
         plt.close(fig)
 
+    # Sum up the success and failure for each solver and store it as the sum 
+    # of points column
+    convergence_data["sum_of_points"] = convergence_data["success"] + convergence_data["failure"]
+    # Take a difference between the success and failure for each solver and store it as the difference
+    # between points column
+    convergence_data["difference_between_points"] = convergence_data["success"] - convergence_data["failure"]
     # Save the dataframe
     convergence_data.to_csv("output/convergence_data.csv", index=False)
     logger.info(convergence_data)

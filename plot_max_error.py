@@ -22,6 +22,7 @@ import numpy as np
 import pandas as pd
 
 import matplotlib.pyplot as plt
+from matplotlib.ticker import LogLocator
 
 from template_reactions import templates
 
@@ -43,8 +44,20 @@ def evaulate_data(
     data: pd.DataFrame,
     accuracy: float,
     ax: plt.Axes,
-    success_settings: dict = {},
-    failure_settings: dict = {},
+    success_settings: dict = {
+        "color": "tab:green",
+        "marker": "o",
+        "linestyle": "None",
+        "fillstyle": "none",
+        "alpha": 0.5,
+    },
+    failure_settings: dict = {
+        "color": "tab:red",
+        "marker": "o",
+        "linestyle": "None",
+        "fillstyle": "none",
+        "alpha": 0.5,
+    },
 ) -> Tuple[float]:
     """Plot the data to compare two solvers."""
 
@@ -224,7 +237,7 @@ if __name__ == "__main__":
 
         mesh_desc1, mesh_desc2 = np.meshgrid(desc1_range, desc2_range)
 
-        fig, ax = plt.subplots(1, 2, figsize=(10, 5), constrained_layout=True)
+        fig, ax = plt.subplots(1, 2, figsize=(4.5, 2.5), constrained_layout=True)
 
         # Create a dataframe to store the data
         convergence_data = pd.DataFrame(
@@ -245,3 +258,31 @@ if __name__ == "__main__":
                 convergence_data,
             )
         print(convergence_data)
+
+        # Set the x and y labels
+        ax[0].set_xlabel("Iteration")
+        ax[1].set_xlabel("Iteration")
+        ax[0].set_ylabel("Maximum error")
+        # Plot y on a log scale
+        ax[0].set_yscale("log")
+        ax[1].set_yscale("log")
+        # Set the log axis ticks on the minor ticks
+        ax[0].yaxis.set_minor_locator(LogLocator(base=10.0, subs="all"))
+        ax[1].yaxis.set_minor_locator(LogLocator(base=10.0, subs="all"))
+
+        # Make super title for the figure with the reaction name
+        fig.suptitle(reaction_name, fontsize=11)
+
+        # Set legend for the figure on axis 1, where red is the failure and green is the success
+        # Make it on the right hand side of the figure
+        ax[1].plot([], [], color="tab:green", label="Success")
+        ax[1].plot([], [], color="tab:red", label="Failure")
+        ax[1].legend(
+            loc="center left", frameon=False, bbox_to_anchor=(1.04, 1), borderaxespad=0
+        )
+
+        # Save the figure and the convergence data
+        fig.savefig(os.path.join(basedir, reaction_name, "convergence.png"), dpi=300)
+        convergence_data.to_csv(
+            os.path.join(basedir, reaction_name, "convergence_data.csv")
+        )

@@ -225,6 +225,11 @@ if __name__ == "__main__":
 
     solvers = ["coverages", "numbers_free_xstar"]
 
+    # Create a dataframe for the statistics of the solver
+    solver_statistics = pd.DataFrame(
+        columns=["solver", "reaction", "sum of success", "sum of failure"]
+    )
+
     for reaction_name, desc12_range in descriptor_ranges.items():
         logger.info(f"Plotting and running {reaction_name}.")
 
@@ -237,7 +242,9 @@ if __name__ == "__main__":
 
         mesh_desc1, mesh_desc2 = np.meshgrid(desc1_range, desc2_range)
 
-        fig, ax = plt.subplots(1, 2, figsize=(4.5, 2.5), constrained_layout=True)
+        fig, ax = plt.subplots(
+            1, 2, figsize=(4.5, 2.5), constrained_layout=True, sharey=True
+        )
 
         # Create a dataframe to store the data
         convergence_data = pd.DataFrame(
@@ -257,7 +264,46 @@ if __name__ == "__main__":
                 ax,
                 convergence_data,
             )
-        print(convergence_data)
+
+        # Sum up the successes of the numbers solver
+        numbers_success = convergence_data.loc[
+            convergence_data["solver"] == "numbers_free_xstar", "success"
+        ].sum()
+        # Sum up the failures of the numbers solver
+        numbers_failure = convergence_data.loc[
+            convergence_data["solver"] == "numbers_free_xstar", "failure"
+        ].sum()
+        # Sum up the successes of the coverages solver
+        coverages_success = convergence_data.loc[
+            convergence_data["solver"] == "coverages", "success"
+        ].sum()
+        # Sum up the failures of the coverages solver
+        coverages_failure = convergence_data.loc[
+            convergence_data["solver"] == "coverages", "failure"
+        ].sum()
+
+        # Store the solver statistics
+        solver_statistics = pd.concat(
+            [
+                solver_statistics,
+                pd.DataFrame(
+                    {
+                        "solver": ["numbers_free_xstar"],
+                        "reaction": [reaction_name],
+                        "sum of success": [numbers_success],
+                        "sum of failure": [numbers_failure],
+                    }
+                ),
+                pd.DataFrame(
+                    {
+                        "solver": ["coverages"],
+                        "reaction": [reaction_name],
+                        "sum of success": [coverages_success],
+                        "sum of failure": [coverages_failure],
+                    }
+                ),
+            ]
+        )
 
         # Set the x and y labels
         ax[0].set_xlabel("Iteration")
@@ -286,3 +332,14 @@ if __name__ == "__main__":
         convergence_data.to_csv(
             os.path.join(basedir, reaction_name, "convergence_data.csv")
         )
+
+    # Store solver statistics as a tex table
+    solver_statistics.to_latex(
+        os.path.join(basedir, "solver_statistics.tex"),
+        index=False,
+        float_format="{:0.2f}".format,
+    )
+    # Store as a markdown table
+    solver_statistics.to_markdown(
+        os.path.join(basedir, "solver_statistics.md"), index=False
+    )

@@ -9,11 +9,11 @@ CO_oxidation_ads_ads:
   desc1_max: 3
   desc2_min: -0.5
   desc2_max: 4
-# CO_hydrogenation:
-#   desc1_min: -2.45
-#   desc1_max: 0.25
-#   desc2_min: -1.2
-#   desc2_max: 1.5
+CO_hydrogenation:
+  desc1_min: -2.45
+  desc1_max: 0.25
+  desc2_min: -1.2
+  desc2_max: 1.5
 methanol_synthesis:
   desc1_min: 0
   desc1_max: 3.5

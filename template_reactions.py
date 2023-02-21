@@ -74,6 +74,8 @@ species_definitions['O2_g'] = {'pressure':1./3.}
 species_definitions['CO2_g'] = {'pressure':0}
 species_definitions['s'] = {'site_names': ['111'], 'total':1} #define the sites
 
+max_initial_guesses = 1
+
 data_file = 'data.pkl'
 
 # Parser parameters
@@ -118,6 +120,8 @@ species_definitions = {}
 species_definitions['CO_g'] = {'pressure':1.} #define the gas pressures
 species_definitions['O2_g'] = {'pressure':1./3.}
 species_definitions['CO2_g'] = {'pressure':0}
+
+max_initial_guesses = 1
 
 species_definitions['s'] = {'site_names': ['111'], 'total':1} #define the sites
 
@@ -211,6 +215,8 @@ species_definitions['H2O_g'] = {'pressure':P*delta}
 species_definitions['CH3CH2OH_g'] = {'pressure':P*delta}
 species_definitions['CH3CHO_g'] = {'pressure':P*delta}
 species_definitions['CH3OH_g'] = {'pressure':P*delta}
+
+max_initial_guesses = 1
 
 interaction_fitting_mode = None
 numerical_delta_theta = 0.11
@@ -564,6 +570,8 @@ species_definitions['s'] = {'site_names': ['211'], 'total': 1}
 species_definitions['t'] = {'site_names': ['111'], 'total': 1}
 species_definitions['f'] = {'site_names': ['211'], 'total': 1}
 species_definitions['h'] = {'site_names': ['111'], 'total': 1}
+
+max_initial_guesses = 1
 
 temperature = 523.15
 adsorbate_thermo_mode = 'harmonic_adsorbate'

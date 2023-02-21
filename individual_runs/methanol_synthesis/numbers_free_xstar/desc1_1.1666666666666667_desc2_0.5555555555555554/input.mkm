@@ -219,6 +219,8 @@ species_definitions['t'] = {'site_names': ['111'], 'total': 1}
 species_definitions['f'] = {'site_names': ['211'], 'total': 1}
 species_definitions['h'] = {'site_names': ['111'], 'total': 1}
 
+max_initial_guesses = 1
+
 temperature = 523.15
 adsorbate_thermo_mode = 'harmonic_adsorbate'
 gas_thermo_mode = 'shomate_gas'

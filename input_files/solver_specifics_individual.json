@@ -1,5 +1,5 @@
 {
-	"decimal_precision": 250,
+	"decimal_precision": 1000,
 	"tolerance": 1e-10,
 	"max_rootfinding_iterations": 250,
 	"max_bisections": 0,

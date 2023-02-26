@@ -46,15 +46,15 @@ def evaulate_data(
     ax: plt.Axes,
     success_settings: dict = {
         "color": "tab:green",
-        "marker": "o",
-        "linestyle": "None",
+        "marker": ".",
+        "linestyle": "-",
         "fillstyle": "none",
         "alpha": 0.5,
     },
     failure_settings: dict = {
         "color": "tab:red",
-        "marker": "o",
-        "linestyle": "None",
+        "marker": ".",
+        "linestyle": "-",
         "fillstyle": "none",
         "alpha": 0.5,
     },
@@ -67,12 +67,15 @@ def evaulate_data(
     # Store success and failure data
     success = 0
     failure = 0
+    total = 0
 
     for (desc1, desc2), dat in data.groupby(["descriptor1", "descriptor2"]):
 
         # Split the pandas dataframe into a series of dataframes where the
         # "iteration" column is not strictly monotonically increasing
         chunks = np.split(dat, np.where(np.diff(dat["iteration"]) < 0)[0] + 1)
+
+        total += 1
 
         # Iterate over the chunks
         for chunk in chunks:
@@ -82,13 +85,17 @@ def evaulate_data(
             if chunk["error"].iloc[-1] < accuracy:
                 success += 1
                 ax.plot(chunk["iteration"], chunk["error"], **success_settings)
+                # If it is a succes then there is no need to look at the
+                # other chunks (for things like rate calculations)
+                break
             else:
                 # Make sure that none of the errors are lower than the accuracy
                 assert not any(chunk["error"] < accuracy)
                 failure += 1
                 ax.plot(chunk["iteration"], chunk["error"], **failure_settings)
+                break
 
-    return success, failure
+    return success, failure, total
 
 
 def parse_run(datadir: str, solver: str, reaction: str, ax, i, convergence_data):
@@ -100,7 +107,9 @@ def parse_run(datadir: str, solver: str, reaction: str, ax, i, convergence_data)
         return
 
     # Use pandas to read the csv file
-    data = pd.read_csv(os.path.join(datadir, "error_log.csv"))
+    data = pd.read_csv(os.path.join(datadir, "error_log.csv"), dtype=str)
+    # Convert the strings to floats
+    data = data.astype(float)
     # Set labels for data
     data.columns = ["descriptor1", "descriptor2", "iteration", "error"]
 
@@ -111,7 +120,7 @@ def parse_run(datadir: str, solver: str, reaction: str, ax, i, convergence_data)
     logger.info("Accuracy: %s", ACCURACY)
 
     # Get the data to plot
-    success, failure = evaulate_data(
+    success, failure, total = evaulate_data(
         data,
         accuracy=ACCURACY,
         ax=ax[i],
@@ -123,6 +132,7 @@ def parse_run(datadir: str, solver: str, reaction: str, ax, i, convergence_data)
         "reaction": reaction,
         "success": success,
         "failure": failure,
+        "total": total,
     }
 
     # Concatenate the data to the dataframe
@@ -248,7 +258,7 @@ if __name__ == "__main__":
 
         # Create a dataframe to store the data
         convergence_data = pd.DataFrame(
-            columns=["solver", "reaction", "success", "failure"]
+            columns=["solver", "reaction", "success", "failure", "total"]
         )
 
         for desc1, desc2 in zip(mesh_desc1.flatten(), mesh_desc2.flatten()):
@@ -281,6 +291,13 @@ if __name__ == "__main__":
         coverages_failure = convergence_data.loc[
             convergence_data["solver"] == "coverages", "failure"
         ].sum()
+        # Get the total
+        numbers_total = convergence_data.loc[
+            convergence_data["solver"] == "numbers_free_xstar", "total"
+        ].sum()
+        coverages_total = convergence_data.loc[
+            convergence_data["solver"] == "coverages", "total"
+        ].sum()
 
         # Store the solver statistics
         solver_statistics = pd.concat(
@@ -292,6 +309,7 @@ if __name__ == "__main__":
                         "reaction": [reaction_name],
                         "sum of success": [numbers_success],
                         "sum of failure": [numbers_failure],
+                        "total": [numbers_total],
                     }
                 ),
                 pd.DataFrame(
@@ -300,6 +318,7 @@ if __name__ == "__main__":
                         "reaction": [reaction_name],
                         "sum of success": [coverages_success],
                         "sum of failure": [coverages_failure],
+                        "total": [coverages_total],
                     }
                 ),
             ]

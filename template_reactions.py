@@ -40,6 +40,7 @@ model.tolerance = solver_specifics['tolerance']
 model.max_rootfinding_iterations = solver_specifics['max_rootfinding_iterations']
 model.max_bisections = solver_specifics['max_bisections']
 model.max_damping_iterations = solver_specifics['max_damping_iterations']
+model.output_variables = ['coverage']
 
 # Run in DEBUG mode
 model.DEBUG = True

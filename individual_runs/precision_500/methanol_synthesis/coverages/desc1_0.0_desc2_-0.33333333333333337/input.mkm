@@ -1,0 +1,229 @@
+
+
+rxn_expressions = [
+
+    # methanation
+    'H2_g + 2*_h <-> H-H_h + *_h -> 2H_h',  # 0
+    '*_s + CO_g -> CO_s',  # 1
+    'CO_s + *_f + H_h <-> C-OH_s + *_f + *_h -> C_f + OH_s + *_h',  # 2
+    'C_f + H_h <-> H-C_f + *_h -> CH_f + *_h',  # 3
+    'CH_f + H_h + *_t <-> H-CH_f + *_t + *_h -> CH2_t + *_h + *_f',  # 4
+    'CH2_t + H_h <-> H-CH2_t + *_h -> CH3_t + *_h',  # 5
+    'CH3_t + H_h <-> H-CH3_t + *_h -> CH4_g + *_t + *_h',  # 6
+    'O_s + H_h <-> O-H_s + *_h -> OH_s + *_h ',  # 7
+    'OH_s + H_h <-> H-OH_s + *_h -> H2O_g + *_s+ *_h ',  # 8
+    '2OH_s <-> O-H2O_s + *_s-> H2O_g + O_s + *_s',  # 211only                #9
+
+    # MeOH
+    'CO_s + H_h <-> H-CO_s + *_h -> HCO_s + *_h',  # 10
+    'HCO_s + H_h <-> H-HCO_s + *_h -> CH2O_s + *_h',  # 11
+    'CH2O_s + H_h <-> H-CH2O_s + *_h -> CH3O_s + *_h',  # 12
+    'CH3O_s + H_h <-> CH3O-H_s + *_h -> CH3OH_g + *_h + *_s',  # 13
+
+    'HCO_s + *_f <-> O-CH_s + *_f -> CH_f + O_s',  # 211only          #14
+    'CH2O_s + *_s<-> O-CH2_s + *_s-> CH2_s + O_s',  # 211only                #15
+    'CH3O_s + *_s<-> O-CH3_s + *_s-> CH3_s + O_s',  # 211only                #16
+    'CH3_s + *_t -> CH3_t + *_s',  # 17
+    'CH2_s + *_t -> CH2_t + *_s',  # 18
+
+    # C-CO coupling
+    'C_f + CO_s  <-> C-CO_f + *_s-> CCO_f + *_s',        # 19
+    'CH_f  + CO_s <-> CH-CO_f + *_s-> CHCO_f + *_s',      # 20
+    'CH2_s + CO_s  <-> CH2-CO_s + *_s-> CH2CO_s + *_s',  # 21
+    'CH3_s + CO_s  <-> CH3-CO_s + *_s-> CH3CO_s + *_s',  # 22
+
+    # CCO hydrogenation
+    'CCO_f + H_h <-> H-CCO_f + *_h -> CHCO_f + *_h',
+    'CCO_f + H_h <-> H-CCO_f + *_h -> CCHO_f + *_h',
+    'CHCO_f + H_h + *_s<-> H-CHCO_f + *_h + *_s-> CH2CO_s + *_h + *_f',
+    'CHCO_f + H_h + *_s<-> CHCO-H_f + *_h + *_s-> CHCOH_s + *_h + *_f',
+    'CHCO_f + H_h + *_s<-> CHCO-H_f + *_h + *_s-> CHCHO_s + *_h + *_f',
+
+    'CH2CO_s + H_h <-> CH2CO-H_s + *_h -> CH2COH_s + *_h',
+    'CHCOH_s + H_h <-> H-CHCOH_s + *_h -> CH2COH_s + *_h',
+    'CHCOH_s + H_h <-> CHCOH-H_s + *_h -> CHCHOH_s + *_h',
+    'CH2COH_s + H_h <-> CH2COH-H_s + *_h -> CH2CHOH_s + *_h',
+    'CHCHOH_s + H_h <-> H-CHCHOH_s + *_h -> CH2CHOH_s + *_h',
+    'CHCHOH_s + H_h <-> CHCHOH-H_s + *_h -> CHCH2OH_s + *_h',
+    'CH2CHOH_s + H_h <-> H-CH2CHOH_s + *_h -> CH3CHOH_s + *_h',
+    'CH2CHOH_s + H_h <-> CH2CHOH-H_s + *_h -> CH2CH2OH_s + *_h',
+    'CHCH2OH_s + H_h <-> H-CHCH2OH_s + *_h -> CH2CH2OH_s + *_h',
+    'CH2CH2OH_s + H_h <-> H-CH2CH2OH_s + *_h -> CH3CH2OH_g + *_s+ *_h',
+    'CH3CHOH_s + H_h <-> H-CH3CHOH_s + *_h -> CH3CH2OH_g + *_s+ *_h',
+
+    'CCO_f + H_h <-> CCO-H_f + *_h -> CCOH_f + *_h',
+    'CCHO_f + H_h + *_s<-> H-CCHO_f + *_h + *_s -> CHCHO_s + *_h + *_f',
+    'CCHO_f + H_h + *_s<-> CCHO-H_f + *_h + *_s -> CCHOH_s + *_h + *_f',
+    'CCOH_f + H_h + *_s<-> H-CCOH_f + *_h + *_s -> CCHOH_s + *_h + *_f',
+    'CCOH_f + H_h + *_s<-> CCOH-H_f + *_h + *_s -> CHCOH_s + *_h + *_f',
+    'CCHOH_s + H_h <-> H-CCHOH_s + *_h -> CHCHOH_s + *_h',
+    'CHCHO_s + H_h <-> CHCHO-H_s + *_h -> CHCHOH_s + *_h',
+    'CH2COH_s + H_h <-> CH2COH-H_s + *_h -> CH2CHOH_s + *_h',
+
+    'CH3CO_s + H_h  <-> CH3CO-H_s + *_h -> CH3COH_s + *_h',
+    'CH3CO_s + H_h  <-> H-CH3CO_s + *_h -> CH3CHO_s + *_h',
+    'CH3CHO_s + H_h  <-> CH3CHO-H_s + *_h -> CH3CHOH_s + *_h',
+    'CH3COH_s + H_h  <-> H-CH3COH_s + *_h -> CH3CHOH_s + *_h',
+]
+
+
+transition_state_scaling_parameters = {'C2': [0.856923076923077, 1.0213846153846156],
+                                       'C1': [0.856923076923077, 1.0213846153846156],
+                                       'HA': [0.856923076923077, 1.0213846153846156], 
+                                       'O': [0.856923076923077, 1.0213846153846156],
+                                       'HC': [0.856923076923077, 1.0213846153846156],
+                                       'HCHF': [0.9040078556953679, 1.0850540423932544],
+                                       'HCF': [0.92666528478110022, 1.1472740172658014],
+                                       'HHH': [0.93434150378549374, 0.8706685500086766],
+                                       'CH3OHS': [0.79769953720375431, 1.3288816719091958],
+                                       'CH2COS': [0.66153883256667578, 2.2480723262738671],
+                                       'HCH2OS': [0.65661108228923626, 1.1682969482947245],
+                                       'CCOF': [0.76566126306385485, 1.8603218796633014],
+                                       'CH3COS': [0.94412985940579097, 0.95213477042121075],
+                                       'HCH2T': [1.0117818769374605, 0.62184801171077664],
+                                       'HOHS':[0.75553852148731815, 0.87353763486229896],
+                                       'OCH3S': [0.63348882023953523, 2.0188057837259343],
+                                       'OCHS':[0.81393143870201701, 2.3124332180026932],
+                                       'CHCOF':[0.86418687117997095, 1.4098531921772275],
+                                       'OHS':[0.86707852180806666, 0.84084205423986202],
+                                       'HCH3T':[0.95662009478240573, 0.73742912372397385],
+                                       'HHCOS':[0.80681391439157879, 0.98031578916602335],
+                                       'HCOS':[0.77006109667770817, 1.1203407392851128],
+                                       'COHS':[1.0693928920752096, 0.63985949945071552],
+                                       'OH2OS':[0.88672406942095738, 1.0944069371952425],
+                                       'OCH2S': [0.78928878444791162, 2.3594008814522867],
+                                       }
+
+surface_names = ['Ni', 'Cu', 'Pd', 'Pt', 'Ag', 'Rh', 'Ru', 'CuCo']
+
+descriptor_names = ['CO_s', 'OH_s']
+
+descriptor_ranges = [[0.0, 0.0],[-0.33333333333333337, -0.33333333333333337]]
+
+resolution = 1
+
+scaling_constraint_dict = {
+
+    # Methanation intermediates
+    'C_f': ['+', 0, None],
+    'CO_s': ['+', 0, None],
+    'H_h': ['+', 0, None],
+    'CH_f': ['+', 0, None],
+    'CH2_t': ['+', 0, None],
+    'CH2_s': ['+', 0, None],
+    'CH3_t': ['+', 0, None],
+    'CH3_s': ['+', 0, None],
+    'OH_s': [0, '+', None],
+    'O_s': [0, '+', None],
+
+    # Methanol intermediates (from J. Cat. MeOH paper)
+    'HCO_s': ['+', 0, None],
+    'CH2O_s': ['+', '+', None],
+    'CH3O_s': [0, '+', None],
+
+    # CC intermediates
+    'CCO_f': ['+', 0, None],
+    'CHCO_f': ['+', '+', None],
+    'CCHO_f': ['+', '+', None],
+    'CCOH_f': ['+', 0, None],
+    'CH2CO_s': ['+', '+', None],
+    'CHCHO_s': ['+', '+', None],
+    'CHCOH_s': ['+', 0, None],
+    'CCHOH_s': ['+', 0, None],
+    'CH2COH_s': ['+', 0, None],
+    'CHCHOH_s': ['+', 0, None],
+    'CH2CHOH_s': ['+', 0, None],
+    'CHCH2OH_s': ['+', 0, None],
+    'CH2CH2OH_s': ['+', 0, None],
+    'CH3CHOH_s': ['+', 0, None],
+    'CH3CO_s': ['+', '+', None],
+    'CH3CHO_s': ['+', 0, None],
+    'CH3COH_s': ['+', 0, None],
+
+    # formic acid and CO pathway
+    'HCOO_s': [0, '+', None],
+    'COOH_s': ['+', 0, None],
+    'HCOOH_s': [0, 0, 2.01],  # Studt approximation, Nat. Chem.
+    'H-COO_s': 'final_state',
+    'COO-H_s': 'initial_state',
+    'HCOO-H_s': 'initial_state',
+    'H-COOH_s': 'final_state',
+    'OC-OH_s': 'final_state',
+
+    # acetaldehyde pathway
+    'H2COOH_s': [0, '+', None],
+    'H-HCOOH_s': 'final_state',
+    'H2CO-OH_s': 'final_state',
+
+    'C-CO_f': 'TS(C_f+CO):CCOF',
+    'H-CH3COH_s': 'TS(CH3COH+H_h):HC',
+    'CH2CHOH-H_s': 'TS(CH2CHOH+H_h):HA',
+    'H-CHCH2OH_s': 'TS(CHCH2OH+H_h):HC',
+    'H-CH3CHOH_s': 'TS(CH3CHOH+H_h):HC',
+    'H-CCHO_f': 'TS(CCHO_f+H_h):HC',
+    'CHCHOH-H_s': 'TS(CHCHOH+H_h):HA',
+    'CH2-CO_s': 'TS(CH2+CO):CH2COS',
+    'H-CH2CHOH_s': 'TS(CH2CHOH+H_h):HC',
+    'CH3CHO-H_s': 'TS(CH3CHO+H_h):HA',
+    'H-CHCHO_s': 'TS(CHCHO+H_h):HC',
+    'CH3-CO_s': 'TS(CH3+CO):CH3COS',
+    'H-CH2_t': 'TS(CH2_t+H_h):HCH2T',
+    'CH3O-H_s': 'TS(CH3O+H_h):CH3OHS',
+    'H-CCHOH_s': 'TS(CCHOH+H_h):HC',
+    'H-CHCHOH_s': 'TS(CHCHOH+H_h):HC',
+    'H-CCOH_f': 'TS(CCOH_f+H_h):HC',
+    'H-CH2O_s': 'TS(CH2O+H_h):HCH2OS',
+    'H-OH_s': 'TS(OH+H_h):HOHS',
+    'O-CH3_s': 'TS(O+CH3):OCH3S',
+    'H-CH_f': 'TS(CH_f+H_h):HCHF',
+    'H-C_f': 'TS(C_f+H_h):HCF',
+    'O-CH_s': 'TS(O+CH_f):OCHS',
+    'CH-CO_f': 'TS(CH_f+CO):CHCOF',
+    'CHCOH-H_s': 'TS(CHCOH+H_h):HA',
+    'O-H_s': 'TS(O+H_h):OHS',
+    'H-CCO_f': 'TS(CCO_f+H_h):HA',
+    'H-CH3_t': 'TS(CH3_t+H_h):HCH3T',
+    'CCOH-H_f': 'TS(CCOH_f+H_h):HA',
+    'H-CHCOH_s': 'TS(CHCOH+H_h):HC',
+    'H-H_h': 'TS(H_h+H_h):HHH',
+    'CH2COH-H_s': 'TS(CH2COH+H_h):HA',
+    'H-HCO_s': 'TS(HCO+H_h):HHCOS',
+    'CCO-H_f': 'TS(CCO_f+H_h):HC',
+    'H-CO_s': 'TS(CO+H_h):HCOS',
+    'CH3CO-H_s': 'TS(CH3COH+H_h):HA',
+    'CHCO-H_f': 'TS(CHCO_f+H_h):HC',
+    'C-OH_s': 'TS(OH+C_f):COHS',
+    'H-CHCO_f': 'TS(CHCO_f+H_h):HC',
+    'H-CH2CH2OH_s': 'TS(CH2CH2OH+H_h):HC',
+    'O-H2O_s': 'TS(OH+OH):OH2OS',
+    'CHCHO-H_s': 'TS(CHCHO+H_h):HA',
+    'CCHO-H_f': 'TS(CCHO_f+H_h):HA',
+    'O-CH2_s': 'TS(O+CH2):OCH2S',
+    'H-CH3CO_s': 'TS(CH3CO+H_h):HC',
+    'CH2CO-H_s': 'TS(CH2CO+H_h):HA',
+}
+
+data_file = 'data.pkl'
+
+total_C = 6.7
+species_definitions = {}
+species_definitions['CO_g'] = {'pressure': total_C}
+species_definitions['H2_g'] = {'pressure': 13.3}
+species_definitions['CH4_g'] = {'pressure': 1e-6}
+species_definitions['CH3OH_g'] = {'pressure': 1e-9}
+species_definitions['CH3CH2OH_g'] = {'pressure': 1e-9}
+species_definitions['H2O_g'] = {'pressure': 1e-2}
+
+species_definitions['s'] = {'site_names': ['211'], 'total': 1}
+species_definitions['t'] = {'site_names': ['111'], 'total': 1}
+species_definitions['f'] = {'site_names': ['211'], 'total': 1}
+species_definitions['h'] = {'site_names': ['111'], 'total': 1}
+
+max_initial_guesses = 1
+
+temperature = 523.15
+adsorbate_thermo_mode = 'harmonic_adsorbate'
+gas_thermo_mode = 'shomate_gas'
+
+input_file = 'energies.txt'
+

@@ -1,0 +1,402 @@
+surface_name	site_name	species_name	formation_energy	bulk_structure	frequencies	other_parameters	reference
+None	gas	CH3CH2OH	1.89	None	[3653,2984,2939,2900,1490,1464,1412,1371,1256,1091,1028,888,417,2991,2910,1446,1275,1161,812]	[]	NIST
+None	gas	CH4	0	None	[2917,1534,1534,3019,3019,3019,1306,1306,1306]	[]	NIST
+None	gas	H2	0	None	[4401]	[]	NIST
+None	gas	H2O	0	None	[3657,1595,3756]	[]	NIST
+None	gas	CH3OH	1.31	None	[3681,3000,2844,1477,1455,1345,1060,1033,2960,1477,1165,200]	[]	NIST
+None	gas	CO	2.77	None	[2170]	[]	NIST
+None	gas	CO2	2.42	None	[125.2, 138.1, 650.1, 650.4, 1336.5, 2363.7]	[]	JSY
+None	gas	HCOOH	1.890	None	[88.7, 124.5, 200.3, 625.1, 684.9, 1019.5, 1087.8, 1278.6, 1381.8, 1767.3, 3024.5, 3653.7]	[]	JSY
+CuCo	211	C	2.04	fcc	[]	[]	Ang
+Ag	211	C	5.071	fcc	[]	[]	Methanation
+Cu	211	C	3.542	fcc	[267, 563, 576]	[]	Methanation
+Cu+K	211	C	3.442	fcc	[]	[]	Methanation
+Pd	211	C	1.505	fcc	[]	[]	Methanation
+Pt	211	C	2.100	fcc	[]	[]	Methanation
+Rh	211	C	1.380	fcc	[]	[]	Methanation
+Au	211	C	4.774	fcc	[]	[]	Methanation
+Ni	211	C	1.517	fcc	[]	[]	Methanation
+Ir	211	C	1.573	fcc	[]	[]	Methanation
+Ru	211	C	1.2279	fcc	[]	[]	Methanation
+CuCo	211	CO	1.56	fcc	[]	[]	Ang
+Ag	211	CO	2.842	fcc	[]	[]	Methanation
+Cu	211	CO	2.250	fcc	[44,144,208,260,280,2004]	[]	Methanation
+Pd	211	CO	1.193	fcc	[]	[]	Methanation
+Pt	211	CO	1.081	fcc	[]	[]	Methanation
+Rh	211	CO	1.042	fcc	[]	[]	Methanation
+Au	211	CO	2.545	fcc	[]	[]	Methanation
+Ni	211	CO	1.223	fcc	[]	[]	Methanation
+Ir	211	CO	0.641	fcc	[]	[]	Methanation
+Ru	211	CO	0.952	fcc	[]	[]	Methanation
+Ag	211	CH	3.96	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Re	211	CH	0.06	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Mn	211	CH	0.36	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ru	211	CH	0.71	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Rh	211	CH	1.01	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Co	211	CH	1.16	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Pt	211	CH	1.19	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Pd	211	CH	1.57	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Cu	211	CH	2.7	fcc	[354, 386, 410, 632, 668, 2987]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Au	211	CH	3.43	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ir	211	CH	0.685	fcc	[]	[]	Phys. Rev. Lett. 99, 016105 (2007)"
+Ni	211	CH	1.215	fcc	[]	[]	Phys. Rev. Lett. 99, 016105 (2007)"
+Re	211	CH2	0.21	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Mn	211	CH2	0.49	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ru	211	CH2	0.69	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Pt	211	CH2	0.76	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Rh	211	CH2	0.76	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Co	211	CH2	0.79	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ni	211	CH2	1.14	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Pd	211	CH2	1.28	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Cu	211	CH2	2.22	fcc	[148,209,396,431,451,672,1296,2976,3030]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Au	211	CH2	2.23	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ag	211	CH2	2.87	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ir	211	CH2	0.359	fcc	[]	[]	Phys. Rev. Lett. 99, 016105 (2007)"
+Re	211	CH3	-0.13	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Mn	211	CH3	0.02	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Co	211	CH3	0.04	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ru	211	CH3	0.06	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Rh	211	CH3	0.36	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ni	211	CH3	0.39	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Pt	211	CH3	0.46	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Pd	211	CH3	0.79	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Cu	211	CH3	0.97	fcc	[124, 147, 210, 375, 491, 649, 1146, 1380, 1396, 2940, 2986, 3103]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Au	211	CH3	1.1	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ir	211	CH3	0.109	fcc	[]	[]	Phys. Rev. Lett. 99, 016105 (2007)"
+CuCo	211	O	-0.01	fcc	[]	[]	Ang
+Ag	211	O	1.88	fcc	[]	[]	Methanation
+Cu	211	O	0.987	fcc	[310,398,437]	[]	Methanation
+Cu+K	211	O	0.687	fcc	[]	[]	Methanation
+Pd	211	O	1.503	fcc	[]	[]	Methanation
+Pt	211	O	1.265	fcc	[]	[]	Methanation
+Rh	211	O	0.162	fcc	[]	[]	Methanation
+Au	211	O	2.604	fcc	[]	[]	Methanation
+Ni	211	O	0.13	fcc	[]	[]	Methanation
+Ir	211	O	-0.109	fcc	[]	[]	Methanation
+Ru	211	O	-0.101	fcc	[]	[]	Methanation
+CuCo	211	OH	-0.43	fcc	[]	[]	Ang
+Ir	211	OH	-0.354	fcc	[]	[]	Phys. Rev. Lett. 99, 016105 (2007)"
+Re	211	OH	-1.364	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Mn	211	OH	-1.277	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Fe	211	OH	-1.12	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ru	211	OH	-0.688	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Co	211	OH	-0.641	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ni	211	OH	-0.496	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ir	211	OH	-0.396	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Rh	211	OH	-0.365	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Cu	211	OH	-0.038	fcc	[73,296,379,497,664,3843]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Pd	211	OH	0.343	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Pt	211	OH	0.362	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ag	211	OH	0.492	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Au	211	OH	0.939	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ir	211	H	-0.704	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Re	211	H	-0.686	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Mn	211	H	-0.666	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Fe	211	H	-0.596	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ru	211	H	-0.532	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Pt	211	H	-0.5	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Rh	211	H	-0.492	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Pd	211	H	-0.45	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ni	211	H	-0.425	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Cu	211	H	-0.059	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ag	211	H	0.277	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Au	211	H	0.1	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+
+Ag	211	HCO	3.214	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Cu	211	HCO	2.754	fcc	[2805, 1661, 1197, 591, 370, 152, 184, 84, 49]	[]	J. Catal. 293, 51-60 (2012)
+Pd	211	HCO	1.843	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Pt	211	HCO	1.786	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Rh	211	HCO	1.825	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Au	211	HCO	2.883	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Cu	211	CH2O	2.351	fcc	[2923, 3017, 1484, 1340, 1151, 873, 408, 289, 205, 100, 54, 46]	[]	J. Catal. 293, 51-60 (2012)
+Pd	211	CH2O	1.919	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Pt	211	CH2O	1.768	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Rh	211	CH2O	1.434	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Ag	211	CH3O	1.891	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Cu	211	CH3O	1.341	fcc	[2955, 3013, 3036, 1443, 1437, 1416, 1130, 1117, 1030, 326, 294, 300, 130, 114, 35]	[]	J. Catal. 293, 51-60 (2012)
+Pd	211	CH3O	1.715	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Pt	211	CH3O	1.535	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Rh	211	CH3O	1.04	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+
+Re	211	H-C	1.28	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Mn	211	H-C	1.32	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ru	211	H-C	1.74	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Rh	211	H-C	1.97	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Co	211	H-C	2.18	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Pd	211	H-C	2.25	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Pt	211	H-C	3.06	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Cu	211	H-C	4.31	fcc	[227.6,496.4,527.6,812.8,1127.5]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Au	211	H-C	5.78	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ag	211	H-C	5.99	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Re	211	H-CH	0.6	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Mn	211	H-CH	0.64	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ru	211	H-CH	1.07	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Rh	211	H-CH	1.54	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Co	211	H-CH	1.78	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ni	211	H-CH	1.93	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Pd	211	H-CH	2.05	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Pt	211	H-CH	2.35	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Cu	211	H-CH	3.27	fcc	[256.5,353.1,382,620.8,759.1,834.1,1231.5,3019.7]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Au	211	H-CH	4.58	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ag	211	H-CH	4.74	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Fe	211	H-OH	-0.15	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ru	211	H-OH	-0.005	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ir	211	H-OH	0.242	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Co	211	H-OH	0.266	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ni	211	H-OH	0.349	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Rh	211	H-OH	0.487	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Pt	211	H-OH	0.719	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Cu	211	H-OH	0.798	fcc	[51,141,184,327,486,790,1613,3805]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Pd	211	H-OH	0.823	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ag	211	H-OH	1.389	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Au	211	H-OH	1.82	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Re	211	O-H	-0.791	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Mn	211	O-H	-0.686	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Fe	211	O-H	-0.351	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ru	211	O-H	0.267	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Co	211	O-H	0.444	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ir	211	O-H	0.596	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ni	211	O-H	0.678	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Rh	211	O-H	0.729	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Pt	211	O-H	1.6	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Cu	211	O-H	1.628	fcc	[188.2,293.4,421.3,583.5,1071]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Pd	211	O-H	1.753	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ag	211	O-H	2.801	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Au	211	O-H	3.175	fcc	[]	[]	Phys. Chem. Chem. Phys., 13, 20760, (2011)
+Ag	211	C-OH	6.542	fcc	[]	[]	Methanation
+Cu	211	C-OH	4.735	fcc	[184.8,247.9,317.1,420.8,452.6,564.6,582.4,3673]	[]	Methanation
+Pd	211	C-OH	2.346	fcc	[]	[]	Methanation
+Pt	211	C-OH	2.977	fcc	[]	[]	Methanation
+Rh	211	C-OH	1.990	fcc	[]	[]	Methanation
+Ag	211	O-H2O	1.861	fcc	[]	[]	Methanation
+Cu	211	O-H2O	0.924	fcc	[49.8,109.5,233.3,302,425.5,427.4,629,683.9,1339.8,1496.1,3870.9]	[]	Methanation
+Pd	211	O-H2O	1.829	fcc	[]	[]	Methanation
+Pt	211	O-H2O	1.557	fcc	[]	[]	Methanation
+Rh	211	O-H2O	0.454	fcc	[]	[]	Methanation
+Au	211	O-H2O	2.903	fcc	[]	[]	Methanation
+Ni	211	O-H2O	0.325	fcc	[]	[]	Methanation
+Ir	211	O-H2O	0.37	fcc	[]	[]	Methanation
+Ru	211	O-H2O	-0.102	fcc	[]	[]	Methanation
+
+Ag	211	H-CO	3.696	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Cu	211	H-CO	3.108	fcc	[1871, 1652, 499, 413, 36, 148, 193, 220]	[]	J. Catal. 293, 51-60 (2012)
+Pd	211	H-CO	1.968	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Pt	211	H-CO	1.848	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Rh	211	H-CO	1.821	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Au	211	H-CO	3.3	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Ag	211	H-HCO	3.739	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Cu	211	H-HCO	3.199	fcc	[2918, 1658, 1558, 1185, 871, 699, 376, 188, 175, 36, 52]	[]	J. Catal. 293, 51-60 (2012)
+Pd	211	H-HCO	2.474	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Pt	211	H-HCO	2.123	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Rh	211	H-HCO	1.847	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Ag	211	H-CH2O	3.072	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Cu	211	H-CH2O	2.559	fcc	[3037, 2956, 1492, 1438, 1333, 1171, 1086, 816, 336, 296, 195, 105, 99, 45]	[]	J. Catal. 293, 51-60 (2012)
+Pd	211	H-CH2O	2.399	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Pt	211	H-CH2O	2.148	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Rh	211	H-CH2O	1.715	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Ag	211	CH3O-H	2.983	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Cu	211	CH3O-H	2.551	fcc	[2955, 3032, 3023, 1403, 1425, 1449, 1125, 1132, 1000, 997, 738, 292, 259, 138, 83, 80, 30]	[]	J. Catal. 293, 51-60 (2012)
+Pd	211	CH3O-H	2.415	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Pt	211	CH3O-H	2.123	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Rh	211	CH3O-H	1.846	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Au	211	CH3O-H	3.02	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Ru	211	CH3O-H	1.63	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Ni	211	CH3O-H	1.869	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+Ir	211	CH3O-H	1.538	fcc	[]	[]	J. Catal. 293, 51-60 (2012)
+
+Ni	211	C-CO	4.02	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Rh	211	C-CO	3.83	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Ir	211	C-CO	3.85	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Pd	211	C-CO	4.28	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Pt	211	C-CO	4.35	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Cu	211	C-CO	6.69	fcc	[2011,527,460,360,113,54,257,261]	[]	"Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Ag	211	C-CO	8.20	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Au	211	C-CO	7.44	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Rh	211	CH-CO	3.37	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Pd	211	CH-CO	4.00	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Cu	211	CH-CO	5.95	fcc	[3088,2053,919,594,482,462,284,231,24,92,73]	[]	"Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Ag	211	CH-CO	7.37	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Au	211	CH-CO	6.92	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Rh	211	CH2-CO	3.69	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Pd	211	CH2-CO	3.96	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Cu	211	CH2-CO	4.97	fcc	[3066,2967,1874,1300,889,808,551,459,331,275,226,88,160,152]	[]	"Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Ag	211	CH2-CO	6.11	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Au	211	CH2-CO	6.06	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Rh	211	CH3-CO	2.65	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Pd	211	CH3-CO	2.83	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Cu	211	CH3-CO	4.40	fcc	[3059,3233,3217,1896,1384,1379,972,692,630,371,319,199,144,133,53,45,12]	[]	"Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Ag	211	CH3-CO	5.04	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Au	211	CH3-CO	4.55	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011) Corrected for coverage
+Ru	211	O-CH	2.588	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011)
+Rh	211	O-CH	3.288	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011)
+Pt	211	O-CH	4.768	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011)
+Cu	211	O-CH	5.088	fcc	[3076,950,687,155,328,402,373,417]	[]	Catal. Lett. 141, 3, 370-373 (2011)
+Ag	211	O-CH	6.968	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011)
+Au	211	O-CH	7.288	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011)
+Ag	211	O-CH2	6.134	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011)
+Cu	211	O-CH2	4.8	fcc	[3038,2975,1300,671,140,209,401,285,305,341,332]	[]	Catal. Lett. 141, 3, 370-373 (2011)
+Pd	211	O-CH2	4.754	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011)
+Pt	211	O-CH2	3.723	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011)
+Rh	211	O-CH2	3.189	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011)
+Ag	211	O-CH3	4.23	fcc	[3151,3107,2982,1389,1373,1093,693,660,303,227,197,12,12,114]	[]	Catal. Lett. 141, 3, 370-373 (2011)
+Cu	211	O-CH3	3.152	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011)
+Pd	211	O-CH3	3.516	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011)
+Pt	211	O-CH3	3.173	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011)
+Rh	211	O-CH3	2.35	fcc	[]	[]	Catal. Lett. 141, 3, 370-373 (2011)
+Cu	211	CH3CHO	2.5891943527	fcc	[12,12, 18, 38, 49, 68, 172, 497, 749, 875, 1088,1101, 1329, 1370, 1409, 1415, 1779, 2826, 2985, 3046, 3109]	[]	This work
+Cu	211	CH3COH	3.3684	fcc	[12,12,60, 97, 195, 235, 346, 517, 679, 909, 966, 1002,1258, 1314, 1330, 1417, 1418, 2966, 3028, 3128, 3573]	[]	This work
+Cu	211	CH3CHOH	3.02640814039	fcc	[13, 29, 55, 150, 163, 242, 347, 392, 434,845, 891, 994, 1053, 1127, 1225, 1333, 1361, 1420, 1436, 2948, 2955, 3024,3093, 3816]	[]	This work
+Cu	211	CH2CH2OH	3.07159705661	fcc	[12,29, 46, 105, 123, 242, 286, 531, 584,838, 936, 980, 1009, 1099, 1229, 1282, 1348, 1402, 1438, 2875, 2997, 3046,3067, 3836]	[]	This work
+Cu	211	CH2CHOH	3.11971365832	fcc	[12,12,24, 38, 83, 169, 383, 470, 700, 812, 918, 943, 1126, 1239, 1293, 1389, 1624, 3098, 3131, 3235, 3812]	[]	This work
+Cu	211	CHCHOH	3.4578620929	fcc	[12,30, 157, 203, 257, 277, 452, 612, 799,947, 1061, 1108, 1243, 1329, 1557, 3062, 3081, 3824]	[]	This work
+Cu	211	CH2COH	3.64612604416	fcc	[53, 89, 162, 201, 242, 343, 480, 525,719, 838, 935, 1114, 1199, 1351, 1485, 3075, 3190, 3748]	[]	This work
+Cu	211	CHCO	3.66091376748	fcc	[25, 48, 115, 261, 333, 532, 568, 587,942, 1193, 2175, 3140]	[]	This work
+Cu	211	CHCHO	3.75223224262	fcc	[90, 101, 238, 262, 329, 396, 682, 748,923, 1004, 1211, 1300, 1445, 2946, 3083]	[]	This work
+Cu	211	CHCH2OH	3.99042766284	fcc	[16, 61, 120, 147, 290, 324, 373, 554,629, 841, 880, 1053, 1110, 1154, 1277, 1330, 1406, 2878, 2971, 3017, 3718]	[]	This work
+Cu	211	CH2CO	3.99483581325	fcc	[12, 60, 117, 153, 281, 392, 439, 616,789, 969, 1017, 1371, 1801, 3042, 3158]	[]	This work
+Cu	211	CCHOH	4.33918454851	fcc	[30, 70, 157, 222, 320, 349, 599, 616,861, 1098, 1201, 1304, 1524, 3118, 3676]	[]	This work
+Cu	211	CCO	4.36457080399	fcc	[53, 64, 202, 274, 302, 548, 565, 1207, 2124]	[]	This work
+Cu	211	CCH2OH	4.53426452772	fcc	[73, 117, 155, 205, 301, 367, 435, 571, 880, 914, 958, 1123, 1274, 1320, 1424, 2957, 3038, 3705]	[]	This work
+Cu	211	CCHO	4.70295038823	fcc	[75, 139, 162, 191, 251, 356, 627, 923, 1140, 1296, 1455, 2940]	[]	This work
+Cu	211	CHCOH	4.71064595743	fcc	[68, 143, 173, 220, 325, 336, 473, 624, 805, 1021, 1093, 1188, 1353, 2983, 3825]	[]	This work
+Cu	211	CCOH	5.28840793467	fcc	[38, 126, 191, 234, 260, 292, 468, 493, 1024, 1205, 1667, 3783]	[]	This work
+
+CuCo	211	HCO	2.049	fcc	[]	[]	Ang
+CuCo	211	CH2CO	3.179	fcc	[]	[]	Ang
+CuCo	211	CH2O	1.583	fcc	[]	[]	Ang
+CuCo	211	CH2OH	1.679	fcc	[]	[]	Ang
+CuCo	211	CH3	0.64	fcc	[]	[]	Ang
+CuCo	211	CH3CH2O	1.543	fcc	[]	[]	Ang
+CuCo	211	CH3CO	2.540	fcc	[]	[]	Ang
+CuCo	211	CHCHO	3.197	fcc	[]	[]	Ang
+CuCo	211	CH2	1.433	fcc	[]	[]	Ang
+CuCo	211	CH3O	0.899	fcc	[]	[]	Ang
+CuCo	211	CH3CHO	2.253	fcc	[]	[]	Ang
+CuCo	211	O-CH	3.369	fcc	[]	[]	Ang
+CuCo	211	CHCHOH	2.51	fcc	[]	[]	Ang
+CuCo	211	H-CH2O	1.70	fcc	[]	[]	Ang
+CuCo	211	O-CH3	2.517	fcc	[]	[]	Ang
+CuCo	211	CH2-CO	3.30	fcc	[]	[]	Ang
+CuCo	211	H-CO	2.112	fcc	[]	[]	Ang
+CuCo	211	H-HCO	2.564	fcc	[]	[]	Ang
+CuCo	211	CH3O-H	1.755	fcc	[]	[]	Ang
+CuCo	211	CH3-CO	3.045	fcc	[]	[]	Ang
+CuCo	211	C_OH	4.174	fcc	[]	[]	Ang
+CuCo	211	CH2CHO	2.505	fcc	[]	[]	Ang
+CuCo	211	CHOH	1.979	fcc	[]	[]	Ang
+CuCo	211	COH	2.13	fcc	[]	[]	Ang
+CuCo	211	CH3CHOH	2.38	fcc	[]	[]	Ang
+CuCo	211	HCO-H	2.539	fcc	[]	[]	Ang
+CuCo	211	CH3CHO_H	3.144	fcc	[]	[]	Ang
+CuCo	211	H-C	2.730	fcc	[]	[]	Ang
+CuCo	211	CH2-OH	2.413	fcc	[]	[]	Ang
+CuCo	211	H-OH	0.558	fcc	[]	[]	Ang
+CuCo	211	CHOH-H	1.948	fcc	[]	[]	Ang
+CuCo	211	CH3CH2O-H	2.460	fcc	[]	[]	Ang
+CuCo	211	H-CH3CHO	2.310	fcc	[]	[]	Ang
+CuCo	211	CH2OH-H	2.539	fcc	[]	[]	Ang
+CuCo	211	H-CH	1.920	fcc	[]	[]	Ang
+CuCo	211	O-CH2	2.884	fcc	[]	[]	Ang
+CuCo	211	CH2CO_H	3.276	fcc	[]	[]	Ang
+CuCo	211	H-CH2CHO	3.168	[]	[]	Ang
+
+Ag	211	CH2CHOH	3.12636458961	fcc	[]	[]	This work
+Ag	211	CH3CHOH	3.29361100422	fcc	[]	[]	This work
+Ag	211	CH3CHO	2.64806980293	fcc	[]	[]	This work
+Ag	211	CH2CH2OH	3.35590078343	fcc	[]	[]	This work
+Ag	211	CH2CO	3.91061827446	fcc	[]	[]	This work
+Ag	211	CH3COH	3.97021992396	fcc	[]	[]	This work
+Ag	211	CHCHOH	4.05324256341	fcc	[]	[]	This work
+Ag	211	CHCO	4.17354383934	fcc	[]	[]	This work
+Ag	211	CH2COH	4.1970664037	fcc	[]	[]	This work
+Ag	211	CHCHO	4.49102188188	fcc	[]	[]	This work
+Ag	211	CHCH2OH	4.67649407759	fcc	[]	[]	This work
+Ag	211	CCO	5.21465872245	fcc	[]	[]	This work
+Ag	211	CCHOH	5.3729451662	fcc	[]	[]	This work
+Ag	211	CHCOH	5.62690938855	fcc	[]	[]	This work
+Ag	211	CCH2OH	5.69156795813	fcc	[]	[]	This work
+Ag	211	CCOH	5.89711527281	fcc	[]	[]	This work
+Ag	211	CCHO	5.93412882664	fcc	[]	[]	This work
+Pd	211	CH3CHOH	2.29116482148	fcc	[]	[]	This work
+Pd	211	CH2CHOH	2.47818889732	fcc	[]	[]	This work
+Pd	211	CH3CHO	2.53359763049	fcc	[]	[]	This work
+Pd	211	CH3COH	2.5815369234	fcc	[]	[]	This work
+Pd	211	CH2CH2OH	2.63714542532	fcc	[]	[]	This work
+Pd	211	CH2COH	2.87965077451	fcc	[]	[]	This work
+Pd	211	CHCH2OH	3.02331017142	fcc	[]	[]	This work
+Pd	211	CH2CO	3.05381725792	fcc	[]	[]	This work
+Pd	211	CHCHOH	3.19017762419	fcc	[]	[]	This work
+Pd	211	CHCO	3.43378905349	fcc	[]	[]	This work
+Pd	211	CHCOH	3.45949633131	fcc	[]	[]	This work
+Pd	211	CCH2OH	3.51746663655	fcc	[]	[]	This work
+Pd	211	CHCHO	3.59911817409	fcc	[]	[]	This work
+Pd	211	CCHOH	3.80071117106	fcc	[]	[]	This work
+Pd	211	CCHO	4.06932892979	fcc	[]	[]	This work
+Pd	211	CCO	4.11623886747	fcc	[]	[]	This work
+Pd	211	CCOH	4.34083556628	fcc	[]	[]	This work
+Rh	211	CH3CHO	1.61117787572	fcc	[]	[]	This work
+Rh	211	CH3COH	1.84253628852	fcc	[]	[]	This work
+Rh	211	CH3CHOH	2.26306114505	fcc	[]	[]	This work
+Rh	211	CH2COH	2.38957032314	fcc	[]	[]	This work
+Rh	211	CH2CHOH	2.43087740783	fcc	[]	[]	This work
+Rh	211	CH2CH2OH	2.44371268826	fcc	[]	[]	This work
+Rh	211	CHCO	2.68942323214	fcc	[]	[]	This work
+Rh	211	CHCHOH	2.71014517665	fcc	[]	[]	This work
+Rh	211	CH2CO	2.75247448244	fcc	[]	[]	This work
+Rh	211	CHCH2OH	2.77041086039	fcc	[]	[]	This work
+Rh	211	CHCHO	2.79080670338	fcc	[]	[]	This work
+Rh	211	CHCOH	2.84786960628	fcc	[]	[]	This work
+Rh	211	CCH2OH	2.88565038648	fcc	[]	[]	This work
+Rh	211	CCHO	3.18669140513	fcc	[]	[]	This work
+Rh	211	CCOH	3.20348453483	fcc	[]	[]	This work
+Rh	211	CCHOH	3.23937142734	fcc	[]	[]	This work
+Rh	211	CCO	3.54830829382	fcc	[]	[]	This work
+Pt	211	CH3CHOH	1.43267728592	fcc	[]	[]	This work
+Pt	211	CH3COH	1.45979759709	fcc	[]	[]	This work
+Pt	211	CH2CHOH	1.58221430317	fcc	[]	[]	This work
+Pt	211	CH2COH	1.71705770617	fcc	[]	[]	This work
+Pt	211	CH2CO	1.99259202182	fcc	[]	[]	This work
+Pt	211	CHCHOH	2.02999373932	fcc	[]	[]	This work
+Pt	211	CH3CHO	2.19470708838	fcc	[]	[]	This work
+Pt	211	CH2CH2OH	2.26008719639	fcc	[]	[]	This work
+Pt	211	CHCH2OH	2.4624083783	fcc	[]	[]	This work
+Pt	211	CHCHO	2.70734919263	fcc	[]	[]	This work
+Pt	211	CCHOH	2.86057970825	fcc	[]	[]	This work
+Pt	211	CHCOH	2.92651426465	fcc	[]	[]	This work
+Pt	211	CCH2OH	3.00832718315	fcc	[]	[]	This work
+Pt	211	CHCO	3.13003301546	fcc	[]	[]	This work
+Pt	211	CCHO	3.97816373881	fcc	[]	[]	This work
+Pt	211	CCO	4.01687618779	fcc	[]	[]	This work
+Pt	211	CCOH	4.28959646762	fcc	[]	[]	This work
+Ag	211	CH3CO	3.539	fcc	[]	[]	This work.
+Pd	211	CH3CO	2.357	fcc	[]	[]	This work.
+Rh	211	CH3CO	1.515	fcc	[]	[]	This work.
+Cu	211	CH3CO	3.209	fcc	[12,22, 37, 94, 166, 210, 368, 519, 869, 933, 1025,1305, 1391, 1410, 1746, 2976, 3062, 3121]	[]	This work.
+Pt	211	CH3CO	1.661	fcc	[]	[]	This work.
+RhZn	211	C	2.013	fcc	[]	[]	Studt. Unpublished
+RhZn	211	O	0.691	fcc	[]	[]	Studt. Unpublished
+Pt3Co	211	C	2.384	fcc	[]	[]	This work
+Pt3Co	211	O	1.36	fcc	[]	[]	This work
+Pt3Co_B	211	C	2.155	fcc	[]	[]	This work
+Pt3Co_B	211	O	0.725	fcc	[]	[]	This work
+Co3Pt	211	C	2.39	fcc	[]	[]	This work
+Co3Pt	211	O	0.681	fcc	[]	[]	This work
+Cu3Co	211	C	2.753	fcc	[]	[]	This work
+Cu3Co	211	O	0.187	fcc	[]	[]	This work
+Co3Cu	211	C	2.332	fcc	[]	[]	This work
+Co3Cu	211	O	0.03	fcc	[]	[]	This work
+Cu3Fe	211	C	2.024	fcc	[]	[]	Studt. Unpublished
+Cu3Fe	211	O	-0.213	fcc	[]	[]	Studt. Unpublished
+Cu3Ni	211	C	1.925	fcc	[]	[]	Studt. Unpublished
+Cu3Ni	211	O	0.426	fcc	[]	[]	Studt. Unpublished
+Re	211	C-O	1.213	fcc	[]	[]	"Catal. Lett. 141, 3, 370-373 (2011)"
+Fe	211	C-O	2.503	fcc	[]	[]	"Catal. Lett. 141, 3, 370-373 (2011)"
+Ru	211	C-O	2.803	fcc	[]	[]	"Catal. Lett. 141, 3, 370-373 (2011)"
+Rh	211	C-O	3.033	fcc	[]	[]	"Catal. Lett. 141, 3, 370-373 (2011)"
+Ir	211	C-O	3.113	fcc	[]	[]	"Catal. Lett. 141, 3, 370-373 (2011)"
+Co	211	C-O	3.193	fcc	[]	[]	"Catal. Lett. 141, 3, 370-373 (2011)"
+Ni	211	C-O	3.433	fcc	[]	[]	"Catal. Lett. 141, 3, 370-373 (2011)"
+Pt	211	C-O	4.113	fcc	[]	[]	"Catal. Lett. 141, 3, 370-373 (2011)"
+Pd	211	C-O	4.633	fcc	[]	[]	"Catal. Lett. 141, 3, 370-373 (2011)"
+Ag	211	C-O	8.073	fcc	[]	[]	"Catal. Lett. 141, 3, 370-373 (2011)"
+Au	211	C-O	8.183	fcc	[]	[]	"Catal. Lett. 141, 3, 370-373 (2011)"

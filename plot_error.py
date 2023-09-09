@@ -26,6 +26,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.ticker import LogLocator
 
+import copy
+
 from template_reactions import templates
 
 from plot_params import get_plot_params
@@ -235,7 +237,7 @@ if __name__ == "__main__":
 
     precision_folders = glob.glob(os.path.join(_basedir, "precision_*"))    
 
-    solver_specifics = json.load(
+    _solver_specifics = json.load(
         open(os.path.join("input_files", "solver_specifics_individual.json"))
     )
 
@@ -247,8 +249,11 @@ if __name__ == "__main__":
 
     for basedir in precision_folders:
 
+        solver_specifics = copy.deepcopy(_solver_specifics)
+
         precision = basedir.split("_")[-1].replace("precision_", "")
         precision = int(precision)
+        solver_specifics['decimal_precision'] = precision
 
         for reaction_name, desc12_range in descriptor_ranges.items():
 
@@ -346,6 +351,8 @@ if __name__ == "__main__":
             # Plot y on a log scale
             ax[0].set_yscale("log")
             ax[1].set_yscale("log")
+            ax[0].set_xlim(0, 20)
+            ax[1].set_xlim(0, 20)
             # Set the log axis ticks on the minor ticks
             ax[0].yaxis.set_minor_locator(LogLocator(base=10.0, subs="all"))
             ax[1].yaxis.set_minor_locator(LogLocator(base=10.0, subs="all"))

@@ -29,6 +29,18 @@ def get_cli_args():
     parser.add_argument(
         "--resolution", type=int, default=10, help="Number of points to plot."
     )
+    parser.add_argument(
+        "--reaction_config",
+        type=str,
+        default="config/co_oxidation.yaml",
+        help="Reaction configuration file.",
+    )
+    parser.add_argument(
+        "--plot_results",
+        action="store_true",
+        default=False,
+        help="Plot the results of the calculations.",
+    )
     return parser.parse_args()
 
 
@@ -249,12 +261,12 @@ def create_concat_df(
 
 if __name__ == "__main__":
     """Plot the maximum error for each individually run point."""
-    descriptor_ranges = yaml.safe_load(open("config/descriptor_ranges.yaml"))
     args = get_cli_args()
-    _basedir = os.path.join(os.getcwd(), "individual_runs")
+    descriptor_ranges = yaml.safe_load(open(args.reaction_config))
+    _basedir = os.path.join(os.getcwd(), "calculations")
     precision_folders = glob.glob(os.path.join(_basedir, "precision_*"))
     _solver_specifics = json.load(
-        open(os.path.join("input_files", "solver_specifics_individual.json"))
+        open(os.path.join("input_files", "solver_specifics.json"))
     )
     solvers = ["coverages", "numbers_free_xstar", "numbers_fix_xstar"]
     solver_statistics = pd.DataFrame(
@@ -375,6 +387,9 @@ if __name__ == "__main__":
                 os.path.join(basedir, reaction_name, "convergence_data.csv")
             )
             plt.close(fig)
+    
+    if not args.plot_results:
+        exit(0)
 
     solver_statistics = solver_statistics.sort_values(by="precision")
     solver_statistics = solver_statistics.reset_index(drop=True)

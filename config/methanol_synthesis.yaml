@@ -1,0 +1,5 @@
+methanol_synthesis:
+  desc1_min: 0
+  desc1_max: 3.5
+  desc2_min: -1.0
+  desc2_max: 1.0

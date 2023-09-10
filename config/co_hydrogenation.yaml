@@ -1,0 +1,5 @@
+CO_hydrogenation:
+  desc1_min: -2.45
+  desc1_max: 0.25
+  desc2_min: -1.2
+  desc2_max: 1.5

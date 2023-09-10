@@ -26,6 +26,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.ticker import LogLocator
 
+import seaborn as sns
+
 import copy
 
 from template_reactions import templates
@@ -225,60 +227,73 @@ def run_and_parse_calculation(
 
     return convergence_data
 
+def compute_success_failure_total(solver_name: str, df: pd.DataFrame) -> Tuple[int, int, int]:
+    """Compute the number of successful and failed runs for a given solver."""
+
+    # Sum up the successes of the numbers solver
+    success = df.loc[
+        df["solver"] == solver_name, "success"
+    ].sum()
+    # Sum up the failures of the numbers solver
+    failure = df.loc[
+        df["solver"] == solver_name, "failure"
+    ].sum()
+    # Get the total
+    total = df.loc[
+        df["solver"] == solver_name, "total"
+    ].sum()
+
+    return success, failure, total
+
+def create_concat_df(precision:float, solver: str, reaction: str, success: int, failure: int, total: int) -> pd.DataFrame:
+    """Create a dataframe with the solver statistics."""
+    return pd.DataFrame(
+        {
+            "precision": [precision],
+            "solver": [solver],
+            "reaction": [reaction],
+            "sum of success": [success],
+            "sum of failure": [failure],
+            "total": [total],
+        }
+    )
+
 
 if __name__ == "__main__":
     """Plot the maximum error for each individually run point."""
-
     descriptor_ranges = yaml.safe_load(open("config/descriptor_ranges.yaml"))
-
     args = get_cli_args()
-
     _basedir = os.path.join(os.getcwd(), "individual_runs")
-
     precision_folders = glob.glob(os.path.join(_basedir, "precision_*"))    
-
     _solver_specifics = json.load(
         open(os.path.join("input_files", "solver_specifics_individual.json"))
     )
-
-    solvers = ["coverages", "numbers_free_xstar"]
-
+    solvers = ["coverages", "numbers_free_xstar", "numbers_fix_xstar"]
     solver_statistics = pd.DataFrame(
         columns=["precision", "solver", "reaction", "sum of success", "sum of failure"]
     )
 
     for basedir in precision_folders:
-
         solver_specifics = copy.deepcopy(_solver_specifics)
-
         precision = basedir.split("_")[-1].replace("precision_", "")
         precision = int(precision)
         solver_specifics['decimal_precision'] = precision
-
         for reaction_name, desc12_range in descriptor_ranges.items():
-
             logger.info(f"Plotting and running {reaction_name}.")
-
             desc1_range = np.linspace(
                 desc12_range["desc1_min"], desc12_range["desc1_max"], args.resolution
             )
             desc2_range = np.linspace(
                 desc12_range["desc2_min"], desc12_range["desc2_max"], args.resolution
             )
-
             mesh_desc1, mesh_desc2 = np.meshgrid(desc1_range, desc2_range)
-
             fig, ax = plt.subplots(
-                1, 2, figsize=(4.5, 2.5), constrained_layout=True, sharey=True
+                1, 3, figsize=(4.5, 2.5), constrained_layout=True, sharey=True
             )
-
-            # Create a dataframe to store the data
             convergence_data = pd.DataFrame(
                 columns=["solver", "reaction", "success", "failure", "total"]
             )
-
             for desc1, desc2 in zip(mesh_desc1.flatten(), mesh_desc2.flatten()):
-
                 convergence_data = run_and_parse_calculation(
                     templates,
                     reaction_name,
@@ -290,90 +305,73 @@ if __name__ == "__main__":
                     ax,
                     convergence_data,
                 )
-
-            # Sum up the successes of the numbers solver
-            numbers_success = convergence_data.loc[
-                convergence_data["solver"] == "numbers_free_xstar", "success"
-            ].sum()
-            # Sum up the failures of the numbers solver
-            numbers_failure = convergence_data.loc[
-                convergence_data["solver"] == "numbers_free_xstar", "failure"
-            ].sum()
-            # Sum up the successes of the coverages solver
-            coverages_success = convergence_data.loc[
-                convergence_data["solver"] == "coverages", "success"
-            ].sum()
-            # Sum up the failures of the coverages solver
-            coverages_failure = convergence_data.loc[
-                convergence_data["solver"] == "coverages", "failure"
-            ].sum()
-            # Get the total
-            numbers_total = convergence_data.loc[
-                convergence_data["solver"] == "numbers_free_xstar", "total"
-            ].sum()
-            coverages_total = convergence_data.loc[
-                convergence_data["solver"] == "coverages", "total"
-            ].sum()
-
-            # Store the solver statistics
+            numbers_free_x_star_success, numbers_free_x_star_failure, numbers_free_x_star_total = compute_success_failure_total(
+                "numbers_free_xstar", convergence_data
+            )
+            numbers_fix_x_star_success, numbers_fix_x_star_failure, numbers_fix_x_star_total = compute_success_failure_total(
+                "numbers_fix_xstar", convergence_data
+            )
+            coverages_success, coverages_failure, coverages_total = compute_success_failure_total(
+                "coverages", convergence_data
+            )
+            numbers_free_x_star_df = create_concat_df(
+                precision,
+                "numbers_free_xstar",
+                reaction_name,
+                numbers_free_x_star_success,
+                numbers_free_x_star_failure,
+                numbers_free_x_star_total,
+            )
+            numbers_fix_x_star_df = create_concat_df(
+                precision,
+                "numbers_fix_xstar",
+                reaction_name,
+                numbers_fix_x_star_success,
+                numbers_fix_x_star_failure,
+                numbers_fix_x_star_total,
+            )
+            coverages_df = create_concat_df(
+                precision,
+                "coverages",
+                reaction_name,
+                coverages_success,
+                coverages_failure,
+                coverages_total,
+            )
             solver_statistics = pd.concat(
                 [
                     solver_statistics,
-                    pd.DataFrame(
-                        {
-                            "precision": [precision],
-                            "solver": ["numbers_free_xstar"],
-                            "reaction": [reaction_name],
-                            "sum of success": [numbers_success],
-                            "sum of failure": [numbers_failure],
-                            "total": [numbers_total],
-                        }
-                    ),
-                    pd.DataFrame(
-                        {
-                            "precision": [precision],
-                            "solver": ["coverages"],
-                            "reaction": [reaction_name],
-                            "sum of success": [coverages_success],
-                            "sum of failure": [coverages_failure],
-                            "total": [coverages_total],
-                        }
-                    ),
+                    numbers_free_x_star_df,
+                    numbers_fix_x_star_df,
+                    coverages_df,
                 ]
             )
-
-            # Set the x and y labels
+            
             ax[0].set_xlabel("Iteration")
             ax[1].set_xlabel("Iteration")
             ax[0].set_ylabel("Least squares error")
-            ax[0].set_title("Coverages solver")
-            ax[1].set_title("Numbers solver")
-            # Plot y on a log scale
+            for _idx_ax, _solver in enumerate(solvers):
+                ax[_idx_ax].set_title(_solver.replace('_', ' '))
             ax[0].set_yscale("log")
             ax[1].set_yscale("log")
             ax[0].set_xlim(0, 20)
             ax[1].set_xlim(0, 20)
-            # Set the log axis ticks on the minor ticks
             ax[0].yaxis.set_minor_locator(LogLocator(base=10.0, subs="all"))
             ax[1].yaxis.set_minor_locator(LogLocator(base=10.0, subs="all"))
-
             fig.suptitle(reaction_name.replace('_', ' '), fontsize=11)
-
-            ax[1].plot([], [], color="tab:green", label="Success")
-            ax[1].plot([], [], color="tab:red", label="Failure")
-            ax[1].legend(
+            ax[-1].plot([], [], color="tab:green", label="Success")
+            ax[-1].plot([], [], color="tab:red", label="Failure")
+            ax[-1].legend(
                 loc="center left", frameon=False, bbox_to_anchor=(1.04, 1), borderaxespad=0
             )
-
             fig.savefig(os.path.join(basedir, reaction_name, "convergence.png"), dpi=300)
             convergence_data.to_csv(
                 os.path.join(basedir, reaction_name, "convergence_data.csv")
             )
             plt.close(fig)
         
-    # Sort the dataframe with precision
     solver_statistics = solver_statistics.sort_values(by="precision")
-
+    solver_statistics = solver_statistics.reset_index(drop=True)
     solver_statistics.to_latex(
         os.path.join("solver_statistics.tex"),
         index=False,
@@ -382,34 +380,29 @@ if __name__ == "__main__":
     solver_statistics.to_markdown(
         os.path.join("solver_statistics.md"), index=False
     )
-
-    # Plot the precision vs success rate for each reaction
-    unique_reactions = solver_statistics["reaction"].unique()
-    fig, ax = plt.subplots(1, len(unique_reactions), figsize=(8, 2), constrained_layout=True)
+    fig, ax = plt.subplots(1, len(descriptor_ranges), figsize=(8, 2), constrained_layout=True)
     for idx, reaction_name in enumerate(descriptor_ranges.keys()):
-        numbers_success = solver_statistics.loc[
-            (solver_statistics["solver"] == "numbers_free_xstar")
-            & (solver_statistics["reaction"] == reaction_name),
-            "sum of success",
-        ]
-        coverage_success = solver_statistics.loc[
-            (solver_statistics["solver"] == "coverages")
-            & (solver_statistics["reaction"] == reaction_name),
-            "sum of success",
-        ]
-        precision = solver_statistics.loc[
-            (solver_statistics["solver"] == "numbers_free_xstar")
-            & (solver_statistics["reaction"] == reaction_name),
-            "precision",
-        ]
-        ax[idx].plot(precision, numbers_success, '-o', color="tab:blue", label="Numbers")
-        ax[idx].plot(precision, coverage_success, '-o', color="tab:orange", label="Coverages")
-        ax[idx].set_title(reaction_name.replace('_', ' '), fontsize=11)
-
+        df_reaction = solver_statistics.loc[solver_statistics["reaction"] == reaction_name]
+        df_reaction = df_reaction.sort_values(by="solver")
+        sns.lineplot(
+            x="precision",
+            y="sum of success",
+            hue="solver",
+            data=df_reaction,
+            ax=ax[idx],
+            markers=True,
+            style="solver",
+            dashes=False,
+            alpha=0.5,
+        )
+        ax[idx].set_title(reaction_name.replace('_', ' '))
     for _ax in ax:
         _ax.set_xlabel("Precision")
         _ax.set_ylim(-5, 105)
     ax[0].set_ylabel("Successful runs")
     ax[-1].legend(loc="center left", frameon=False, bbox_to_anchor=(1.04, 1), borderaxespad=0)
-
+    for _ax in ax[:-1]:
+        _ax.get_legend().remove()
+    for _ax in ax[1:]:
+        _ax.set_ylabel("")
     fig.savefig(os.path.join("outputs/precision_vs_success_rate.png"), dpi=300)

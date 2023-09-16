@@ -41,6 +41,12 @@ def get_cli_args():
         default=False,
         help="Plot the results of the calculations.",
     )
+    parser.add_argument(
+        "--numbers_type",
+        type=str,
+        default="squared",
+        help="Type of numbers to use in the calculations, squared | exponential.",
+    )
     return parser.parse_args()
 
 
@@ -263,11 +269,15 @@ if __name__ == "__main__":
     """Plot the maximum error for each individually run point."""
     args = get_cli_args()
     descriptor_ranges = yaml.safe_load(open(args.reaction_config))
-    _basedir = os.path.join(os.getcwd(), "calculations")
-    precision_folders = glob.glob(os.path.join(_basedir, "precision_*"))
     _solver_specifics = json.load(
         open(os.path.join("input_files", "solver_specifics.json"))
     )
+    if args.numbers_type == "squared":
+        _solver_specifics["numbers_type"] = "squared"
+    elif args.numbers_type == "exponential":
+        _solver_specifics["numbers_type"] = "exponential"
+    _basedir = os.path.join(os.getcwd(), "calculations", f"numbers_type_{args.numbers_type}")
+    precision_folders = glob.glob(os.path.join(_basedir, "precision_*"))
     solvers = ["coverages", "numbers_free_xstar", "numbers_fix_xstar"]
     solver_statistics = pd.DataFrame(
         columns=["precision", "solver", "reaction", "sum of success", "sum of failure"]

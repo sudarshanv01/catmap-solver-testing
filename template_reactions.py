@@ -11,6 +11,10 @@ import json
 mkm_file = 'input.mkm'
 model = ReactionModel(setup_file=mkm_file)
 
+# Import the json file with the solver specifics
+with open('solver_specifics.json') as f:
+    solver_specifics = json.load(f)
+
 # Decide on the solver based on the current
 # working directory.
 folder_name = os.getcwd().split('/')[-2]
@@ -22,17 +26,16 @@ elif 'numbers_fix_xstar' in folder_name:
     # This is the numbers solver with fixed x*=1
     model.use_numbers_solver = True
     model.fix_x_star = True
+    model.numbers_type = solver_specifics['numbers_type']
 elif 'numbers_free_xstar' in folder_name:
     # This is the numbers solver with free x*
     model.use_numbers_solver = True
     model.fix_x_star = False
+    model.numbers_type = solver_specifics['numbers_type']
 else:
     raise ValueError('Unknown folder name. '
                     'Use coverage or numbers_fix_xstar or numbers_free_xstar.')
 
-# Import the json file with the solver specifics
-with open('solver_specifics.json') as f:
-    solver_specifics = json.load(f)
 
 # Use the same solver specifications for all test cases.
 model.decimal_precision = solver_specifics['decimal_precision'] 
